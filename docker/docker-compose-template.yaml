@@ -1,4 +1,5 @@
 x-shared-env: &shared-api-worker-env
+name: plataforma-iasmar
 services:
   # Init container to fix permissions
   init_permissions:
@@ -21,7 +22,9 @@ services:
 
   # API service
   api:
-    image: langgenius/dify-api:1.13.3
+    image: iasmar/dify-api:local
+    build:
+      context: ../api
     restart: always
     environment:
       # Use the shared environment variables.
@@ -62,6 +65,8 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    ports:
+      - "15001:5001"
     networks:
       - ssrf_proxy_network
       - default
@@ -69,7 +74,9 @@ services:
   # worker service
   # The Celery worker for processing all queues (dataset, workflow, mail, etc.)
   worker:
-    image: langgenius/dify-api:1.13.3
+    image: iasmar/dify-api:local
+    build:
+      context: ../api
     restart: always
     environment:
       # Use the shared environment variables.
@@ -82,6 +89,8 @@ services:
       PLUGIN_MAX_PACKAGE_SIZE: ${PLUGIN_MAX_PACKAGE_SIZE:-52428800}
       INNER_API_KEY_FOR_PLUGIN: ${PLUGIN_DIFY_INNER_API_KEY:-QaHbTe77CtuXmsfyhR7+vRjI/+XbV1AaFy691iy+kGDv2Jvy0/eAh8Y1}
     depends_on:
+      api:
+        condition: service_started
       init_permissions:
         condition: service_completed_successfully
       db_postgres:
@@ -115,7 +124,9 @@ services:
   # worker_beat service
   # Celery beat for scheduling periodic tasks.
   worker_beat:
-    image: langgenius/dify-api:1.13.3
+    image: iasmar/dify-api:local
+    build:
+      context: ../api
     restart: always
     environment:
       # Use the shared environment variables.
@@ -123,6 +134,8 @@ services:
       # Startup mode, 'worker_beat' starts the Celery beat for scheduling periodic tasks.
       MODE: beat
     depends_on:
+      api:
+        condition: service_started
       init_permissions:
         condition: service_completed_successfully
       db_postgres:
@@ -152,7 +165,10 @@ services:
 
   # Frontend web application.
   web:
-    image: langgenius/dify-web:1.13.3
+    image: iasmar/dify-web:local
+    build:
+      context: ..
+      dockerfile: web/Dockerfile
     restart: always
     environment:
       CONSOLE_API_URL: ${CONSOLE_API_URL:-}
@@ -177,6 +193,8 @@ services:
       ENABLE_WEBSITE_JINAREADER: ${ENABLE_WEBSITE_JINAREADER:-true}
       ENABLE_WEBSITE_FIRECRAWL: ${ENABLE_WEBSITE_FIRECRAWL:-true}
       ENABLE_WEBSITE_WATERCRAWL: ${ENABLE_WEBSITE_WATERCRAWL:-true}
+    ports:
+      - "13000:3000"
 
   # The PostgreSQL database.
   db_postgres:
@@ -199,6 +217,8 @@ services:
                -c 'idle_in_transaction_session_timeout=${POSTGRES_IDLE_IN_TRANSACTION_SESSION_TIMEOUT:-0}'
     volumes:
       - ./volumes/db/data:/var/lib/postgresql/data
+    ports:
+      - "15432:5432"
     healthcheck:
       test:
         [
@@ -256,6 +276,8 @@ services:
       - ./volumes/redis/data:/data
     # Set the redis password when startup redis server.
     command: redis-server --requirepass ${REDIS_PASSWORD:-difyai123456}
+    ports:
+      - "16379:6379"
     healthcheck:
       test:
         [
@@ -342,7 +364,8 @@ services:
       SENTRY_ENABLED: ${PLUGIN_SENTRY_ENABLED:-false}
       SENTRY_DSN: ${PLUGIN_SENTRY_DSN:-}
     ports:
-      - "${EXPOSE_PLUGIN_DEBUGGING_PORT:-5003}:${PLUGIN_DEBUGGING_PORT:-5003}"
+      - "${EXPOSE_PLUGIN_DAEMON_PORT:-15002}:${PLUGIN_DAEMON_PORT:-5002}"
+      - "${EXPOSE_PLUGIN_DEBUGGING_PORT:-15003}:${PLUGIN_DEBUGGING_PORT:-5003}"
     volumes:
       - ./volumes/plugin_daemon:/app/storage
     depends_on:
@@ -447,8 +470,8 @@ services:
       - api
       - web
     ports:
-      - "${EXPOSE_NGINX_PORT:-80}:${NGINX_PORT:-80}"
-      - "${EXPOSE_NGINX_SSL_PORT:-443}:${NGINX_SSL_PORT:-443}"
+      - "${EXPOSE_NGINX_PORT:-18080}:${NGINX_PORT:-80}"
+      - "${EXPOSE_NGINX_SSL_PORT:-18443}:${NGINX_SSL_PORT:-443}"
 
   # The Weaviate vector store.
   weaviate:
@@ -459,6 +482,8 @@ services:
     volumes:
       # Mount the Weaviate data directory to the con tainer.
       - ./volumes/weaviate:/var/lib/weaviate
+    ports:
+      - "18085:8080"
     environment:
       # The Weaviate configurations
       # You can refer to the [Weaviate](https://weaviate.io/developers/weaviate/config-refs/env-vars) documentation for more information.
