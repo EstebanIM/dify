@@ -1,6 +1,8 @@
 'use client'
+import { useQuery } from '@tanstack/react-query'
 import { useAppContext } from '@/context/app-context'
-import { useGlobalPublicStore } from '@/context/global-public-context'
+import { systemFeaturesQueryOptions } from '@/service/system-features'
+import { defaultSystemFeatures } from '@/types/feature'
 
 export const DEFAULT_PLATFORM_NAME = 'Dify'
 
@@ -10,7 +12,8 @@ export const DEFAULT_PLATFORM_NAME = 'Dify'
 //   → systemFeatures.branding.application_title populated from custom_config for pre-login pages
 //   → 'Dify'
 export default function usePlatformName(): string {
-  const systemFeatures = useGlobalPublicStore(s => s.systemFeatures)
+  const { data } = useQuery(systemFeaturesQueryOptions())
+  const systemFeatures = data ?? defaultSystemFeatures
   const { currentWorkspace } = useAppContext()
 
   return (

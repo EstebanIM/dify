@@ -1,10 +1,12 @@
 'use client'
 import type { FC } from 'react'
+import { cn } from '@langgenius/dify-ui/cn'
+import { useQuery } from '@tanstack/react-query'
 import { useAppContext } from '@/context/app-context'
-import { useGlobalPublicStore } from '@/context/global-public-context'
 import usePlatformName from '@/hooks/use-platform-name'
 import useTheme from '@/hooks/use-theme'
-import { cn } from '@/utils/classnames'
+import { systemFeaturesQueryOptions } from '@/service/system-features'
+import { defaultSystemFeatures } from '@/types/feature'
 import { basePath } from '@/utils/var'
 
 export type LogoStyle = 'default' | 'monochromeWhite'
@@ -34,24 +36,22 @@ const DifyLogo: FC<DifyLogoProps> = ({
   className,
 }) => {
   const { theme } = useTheme()
-  const systemFeatures = useGlobalPublicStore(s => s.systemFeatures)
+  const { data } = useQuery(systemFeaturesQueryOptions())
+  const systemFeatures = data ?? defaultSystemFeatures
   const { currentWorkspace } = useAppContext()
   const platformName = usePlatformName()
-
-  // Precedence: enterprise branding → workspace custom_config (post-login) → systemFeatures logo populated
-  // from custom_config for pre-login pages (signin/install) → Dify SVG default.
   const customLogoUrl
     = (systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo)
-    || currentWorkspace.custom_config?.replace_webapp_logo
-    || systemFeatures.branding.workspace_logo
-    || ''
+      || currentWorkspace.custom_config?.replace_webapp_logo
+      || systemFeatures.branding.workspace_logo
+      || ''
 
   if (customLogoUrl) {
     return (
       <img
         src={customLogoUrl}
         className={cn('block object-contain', logoSizeMap[size], className)}
-        alt="logo"
+        alt={`${platformName} logo`}
       />
     )
   }
