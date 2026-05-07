@@ -8,6 +8,7 @@ import Tooltip from '@/app/components/base/tooltip'
 import { toast } from '@/app/components/base/ui/toast'
 import { LICENSE_LINK } from '@/constants/link'
 import { languages, LanguagesSupported } from '@/i18n-config/language'
+import usePlatformName from '@/hooks/use-platform-name'
 import Link from '@/next/link'
 import { useRouter, useSearchParams } from '@/next/navigation'
 import { useOneMoreStep } from '@/service/use-common'
@@ -47,6 +48,7 @@ const reducer: Reducer<IState, IAction> = (state: IState, action: IAction) => {
 
 const OneMoreStep = () => {
   const { t } = useTranslation()
+  const appName = usePlatformName()
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -147,11 +149,11 @@ const OneMoreStep = () => {
               disabled={isPending}
               onClick={handleSubmit}
             >
-              {t('go', { ns: 'login' })}
+              {t('go', { ns: 'login', appName })}
             </Button>
           </div>
           <div className="system-xs-regular mt-2 block w-full text-text-tertiary">
-            {t('license.tip', { ns: 'login' })}
+            {t('license.tip', { ns: 'login', appName })}
             &nbsp;
             <Link
               className="system-xs-medium text-text-accent-secondary"

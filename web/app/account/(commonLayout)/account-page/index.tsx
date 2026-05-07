@@ -16,6 +16,7 @@ import { toast } from '@/app/components/base/ui/toast'
 import Collapse from '@/app/components/header/account-setting/collapse'
 import { IS_CE_EDITION, validPassword } from '@/config'
 import { useGlobalPublicStore } from '@/context/global-public-context'
+import usePlatformName from '@/hooks/use-platform-name'
 import { useProviderContext } from '@/context/provider-context'
 import { updateUserProfile } from '@/service/common'
 import { useAppList } from '@/service/use-apps'
@@ -34,6 +35,7 @@ const descriptionClassName = `
 
 export default function AccountPage() {
   const { t } = useTranslation()
+  const appName = usePlatformName()
   const { systemFeatures } = useGlobalPublicStore()
   const { data: appList } = useAppList({ page: 1, limit: 100, name: '' })
   const apps = appList?.data || []
@@ -202,8 +204,8 @@ export default function AccountPage() {
       }
       <div className="mb-6 border-[1px] border-divider-subtle" />
       <div className="mb-8">
-        <div className={titleClassName}>{t('account.langGeniusAccount', { ns: 'common' })}</div>
-        <div className={descriptionClassName}>{t('account.langGeniusAccountTip', { ns: 'common' })}</div>
+        <div className={titleClassName}>{t('account.langGeniusAccount', { ns: 'common', appName })}</div>
+        <div className={descriptionClassName}>{t('account.langGeniusAccountTip', { ns: 'common', appName })}</div>
         {!!apps.length && (
           <Collapse
             title={`${t('account.showAppLength', { ns: 'common', length: apps.length })}`}

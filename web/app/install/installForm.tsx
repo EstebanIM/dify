@@ -13,7 +13,7 @@ import Input from '@/app/components/base/input'
 import { validPassword } from '@/config'
 import { LICENSE_LINK } from '@/constants/link'
 import useDocumentTitle from '@/hooks/use-document-title'
-
+import usePlatformName from '@/hooks/use-platform-name'
 import Link from '@/next/link'
 import { useRouter } from '@/next/navigation'
 import { fetchInitValidateStatus, fetchSetupStatus, login, setup } from '@/service/common'
@@ -37,6 +37,7 @@ const accountFormSchema = z.object({
 const InstallForm = () => {
   useDocumentTitle('')
   const { t, i18n } = useTranslation()
+  const appName = usePlatformName()
   const router = useRouter()
   const [showPassword, setShowPassword] = React.useState(false)
   const [loading, setLoading] = React.useState(true)
@@ -214,7 +215,7 @@ const InstallForm = () => {
                   </form>
                 </formContext.Provider>
                 <div className="mt-2 block w-full text-xs text-text-secondary">
-                  {t('license.tip', { ns: 'login' })}
+                  {t('license.tip', { ns: 'login', appName })}
                 &nbsp;
                   <Link
                     className="text-text-accent"

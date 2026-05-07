@@ -13,6 +13,7 @@ import { LICENSE_LINK } from '@/constants/link'
 import { useGlobalPublicStore } from '@/context/global-public-context'
 import { setLocaleOnClient } from '@/i18n-config'
 import { languages, LanguagesSupported } from '@/i18n-config/language'
+import usePlatformName from '@/hooks/use-platform-name'
 import Link from '@/next/link'
 import { useRouter, useSearchParams } from '@/next/navigation'
 import { activateMember } from '@/service/common'
@@ -22,6 +23,7 @@ import { resolvePostLoginRedirect } from '../utils/post-login-redirect'
 
 export default function InviteSettingsPage() {
   const { t } = useTranslation()
+  const appName = usePlatformName()
   const systemFeatures = useGlobalPublicStore(s => s.systemFeatures)
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -76,7 +78,7 @@ export default function InviteSettingsPage() {
         </div>
         <div className="mx-auto mt-6 w-full">
           <Button variant="primary" className="w-full text-sm!">
-            <a href="https://dify.ai">{t('explore', { ns: 'login' })}</a>
+            <a href="https://dify.ai">{t('explore', { ns: 'login', appName })}</a>
           </Button>
         </div>
       </div>
@@ -154,7 +156,7 @@ export default function InviteSettingsPage() {
       </form>
       {!systemFeatures.branding.enabled && (
         <div className="mt-2 block w-full text-text-tertiary system-xs-regular">
-          {t('license.tip', { ns: 'login' })}
+          {t('license.tip', { ns: 'login', appName })}
       &nbsp;
           <Link
             className="text-text-accent-secondary system-xs-medium"

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { toast } from '@/app/components/base/ui/toast'
 import { IS_CE_EDITION } from '@/config'
 import { useGlobalPublicStore } from '@/context/global-public-context'
+import usePlatformName from '@/hooks/use-platform-name'
 import Link from '@/next/link'
 import { useRouter, useSearchParams } from '@/next/navigation'
 import { invitationCheck } from '@/service/common'
@@ -21,6 +22,7 @@ import { resolvePostLoginRedirect } from './utils/post-login-redirect'
 
 const NormalForm = () => {
   const { t } = useTranslation()
+  const appName = usePlatformName()
   const router = useRouter()
   const searchParams = useSearchParams()
   const { isLoading: isCheckLoading, data: loginData } = useIsLogin()
@@ -96,7 +98,7 @@ const NormalForm = () => {
               <RiErrorWarningFill className="absolute -right-1 -top-1 h-4 w-4 text-text-warning-secondary" />
             </div>
             <p className="text-text-primary system-sm-medium">{t('licenseLost', { ns: 'login' })}</p>
-            <p className="mt-1 text-text-tertiary system-xs-regular">{t('licenseLostTip', { ns: 'login' })}</p>
+            <p className="mt-1 text-text-tertiary system-xs-regular">{t('licenseLostTip', { ns: 'login', appName })}</p>
           </div>
         </div>
       </div>
@@ -112,7 +114,7 @@ const NormalForm = () => {
               <RiErrorWarningFill className="absolute -right-1 -top-1 h-4 w-4 text-text-warning-secondary" />
             </div>
             <p className="text-text-primary system-sm-medium">{t('licenseExpired', { ns: 'login' })}</p>
-            <p className="mt-1 text-text-tertiary system-xs-regular">{t('licenseExpiredTip', { ns: 'login' })}</p>
+            <p className="mt-1 text-text-tertiary system-xs-regular">{t('licenseExpiredTip', { ns: 'login', appName })}</p>
           </div>
         </div>
       </div>
@@ -128,7 +130,7 @@ const NormalForm = () => {
               <RiErrorWarningFill className="absolute -right-1 -top-1 h-4 w-4 text-text-warning-secondary" />
             </div>
             <p className="text-text-primary system-sm-medium">{t('licenseInactive', { ns: 'login' })}</p>
-            <p className="mt-1 text-text-tertiary system-xs-regular">{t('licenseInactiveTip', { ns: 'login' })}</p>
+            <p className="mt-1 text-text-tertiary system-xs-regular">{t('licenseInactiveTip', { ns: 'login', appName })}</p>
           </div>
         </div>
       </div>
@@ -149,15 +151,15 @@ const NormalForm = () => {
                   <p className="mt-2 text-text-tertiary body-md-regular">
                     {t('joinTipStart', { ns: 'login' })}
                     {workspaceName}
-                    {t('joinTipEnd', { ns: 'login' })}
+                    {t('joinTipEnd', { ns: 'login', appName })}
                   </p>
                 )}
               </div>
             )
           : (
               <div className="mx-auto w-full">
-                <h2 className="text-text-primary title-4xl-semi-bold">{systemFeatures.branding.enabled ? t('pageTitleForE', { ns: 'login' }) : t('pageTitle', { ns: 'login' })}</h2>
-                <p className="mt-2 text-text-tertiary body-md-regular">{t('welcome', { ns: 'login' })}</p>
+                <h2 className="text-text-primary title-4xl-semi-bold">{systemFeatures.branding.enabled ? t('pageTitleForE', { ns: 'login' }) : t('pageTitle', { ns: 'login', appName })}</h2>
+                <p className="mt-2 text-text-tertiary body-md-regular">{t('welcome', { ns: 'login', appName })}</p>
               </div>
             )}
         <div className="relative">

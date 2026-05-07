@@ -1,6 +1,7 @@
 'use client'
 import { useCallback } from 'react'
 import DifyLogo from '@/app/components/base/logo/dify-logo'
+import usePlatformName from '@/hooks/use-platform-name'
 import WorkplaceSelector from '@/app/components/header/account-dropdown/workplace-selector'
 import { ACCOUNT_SETTING_TAB } from '@/app/components/header/account-setting/constants'
 import { useAppContext } from '@/context/app-context'
@@ -36,6 +37,7 @@ const Header = () => {
   const systemFeatures = useGlobalPublicStore(s => s.systemFeatures)
   const isFreePlan = plan.type === Plan.sandbox
   const isBrandingEnabled = systemFeatures.branding.enabled
+  const platformName = usePlatformName()
   const handlePlanClick = useCallback(() => {
     if (isFreePlan)
       setShowPricingModal()
@@ -46,16 +48,8 @@ const Header = () => {
   const renderLogo = () => (
     <h1>
       <Link href="/apps" className="flex h-8 shrink-0 items-center justify-center overflow-hidden whitespace-nowrap px-0.5 indent-[-9999px]">
-        {isBrandingEnabled && systemFeatures.branding.application_title ? systemFeatures.branding.application_title : 'Dify'}
-        {systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
-          ? (
-              <img
-                src={systemFeatures.branding.workspace_logo}
-                className="block h-[22px] w-auto object-contain"
-                alt="logo"
-              />
-            )
-          : <DifyLogo />}
+        {platformName}
+        <DifyLogo />
       </Link>
     </h1>
   )

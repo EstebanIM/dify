@@ -6,6 +6,7 @@ import Button from '@/app/components/base/button'
 import Loading from '@/app/components/base/loading'
 import { toast } from '@/app/components/base/ui/toast'
 import { validPassword } from '@/config'
+import usePlatformName from '@/hooks/use-platform-name'
 import { useSearchParams } from '@/next/navigation'
 import { changePasswordWithToken } from '@/service/common'
 import { useVerifyForgotPasswordToken } from '@/service/use-common'
@@ -15,6 +16,7 @@ import Input from '../components/base/input'
 
 const ChangePasswordForm = () => {
   const { t } = useTranslation()
+  const appName = usePlatformName()
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
   const isTokenMissing = !token
@@ -87,7 +89,7 @@ const ChangePasswordForm = () => {
           </div>
           <div className="mx-auto mt-6 w-full">
             <Button variant="primary" className="w-full text-sm!">
-              <a href="https://dify.ai">{t('explore', { ns: 'login' })}</a>
+              <a href="https://dify.ai">{t('explore', { ns: 'login', appName })}</a>
             </Button>
           </div>
         </div>

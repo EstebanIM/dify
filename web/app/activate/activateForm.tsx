@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Button from '@/app/components/base/button'
 import Loading from '@/app/components/base/loading'
 import useDocumentTitle from '@/hooks/use-document-title'
-
+import usePlatformName from '@/hooks/use-platform-name'
 import { useRouter, useSearchParams } from '@/next/navigation'
 import { useInvitationCheck } from '@/service/use-common'
 import { cn } from '@/utils/classnames'
@@ -13,6 +13,7 @@ const ActivateForm = () => {
   useDocumentTitle('')
   const router = useRouter()
   const { t } = useTranslation()
+  const appName = usePlatformName()
   const searchParams = useSearchParams()
   const workspaceID = searchParams.get('workspace_id')
   const email = searchParams.get('email')
@@ -60,7 +61,7 @@ const ActivateForm = () => {
           </div>
           <div className="mx-auto mt-6 w-full">
             <Button variant="primary" className="w-full text-sm!">
-              <a href="https://dify.ai">{t('explore', { ns: 'login' })}</a>
+              <a href="https://dify.ai">{t('explore', { ns: 'login', appName })}</a>
             </Button>
           </div>
         </div>

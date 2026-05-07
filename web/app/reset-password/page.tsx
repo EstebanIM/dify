@@ -9,6 +9,7 @@ import { toast } from '@/app/components/base/ui/toast'
 import { emailRegex } from '@/config'
 import { useLocale } from '@/context/i18n'
 import useDocumentTitle from '@/hooks/use-document-title'
+import usePlatformName from '@/hooks/use-platform-name'
 import Link from '@/next/link'
 import { useRouter, useSearchParams } from '@/next/navigation'
 import { sendResetPasswordCode } from '@/service/common'
@@ -16,6 +17,7 @@ import { COUNT_DOWN_KEY, COUNT_DOWN_TIME_MS } from '../components/signin/countdo
 
 export default function CheckCode() {
   const { t } = useTranslation()
+  const appName = usePlatformName()
   useDocumentTitle('')
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -63,7 +65,7 @@ export default function CheckCode() {
       <div className="pb-4 pt-2">
         <h2 className="title-4xl-semi-bold text-text-primary">{t('resetPassword', { ns: 'login' })}</h2>
         <p className="body-md-regular mt-2 text-text-secondary">
-          {t('resetPasswordDesc', { ns: 'login' })}
+          {t('resetPasswordDesc', { ns: 'login', appName })}
         </p>
       </div>
 

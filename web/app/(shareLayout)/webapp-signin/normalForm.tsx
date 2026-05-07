@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import Loading from '@/app/components/base/loading'
 import { IS_CE_EDITION } from '@/config'
 import { useGlobalPublicStore } from '@/context/global-public-context'
+import usePlatformName from '@/hooks/use-platform-name'
 import Link from '@/next/link'
 import { LicenseStatus } from '@/types/feature'
 import { cn } from '@/utils/classnames'
@@ -15,7 +16,7 @@ import SSOAuth from './components/sso-auth'
 
 const NormalForm = () => {
   const { t } = useTranslation()
-
+  const appName = usePlatformName()
   const [isLoading, setIsLoading] = useState(true)
   const { systemFeatures } = useGlobalPublicStore()
   const [authType, updateAuthType] = useState<'code' | 'password'>('password')
@@ -61,7 +62,7 @@ const NormalForm = () => {
               <RiErrorWarningFill className="absolute -right-1 -top-1 h-4 w-4 text-text-warning-secondary" />
             </div>
             <p className="system-sm-medium text-text-primary">{t('licenseLost', { ns: 'login' })}</p>
-            <p className="system-xs-regular mt-1 text-text-tertiary">{t('licenseLostTip', { ns: 'login' })}</p>
+            <p className="system-xs-regular mt-1 text-text-tertiary">{t('licenseLostTip', { ns: 'login', appName })}</p>
           </div>
         </div>
       </div>
@@ -77,7 +78,7 @@ const NormalForm = () => {
               <RiErrorWarningFill className="absolute -right-1 -top-1 h-4 w-4 text-text-warning-secondary" />
             </div>
             <p className="system-sm-medium text-text-primary">{t('licenseExpired', { ns: 'login' })}</p>
-            <p className="system-xs-regular mt-1 text-text-tertiary">{t('licenseExpiredTip', { ns: 'login' })}</p>
+            <p className="system-xs-regular mt-1 text-text-tertiary">{t('licenseExpiredTip', { ns: 'login', appName })}</p>
           </div>
         </div>
       </div>
@@ -93,7 +94,7 @@ const NormalForm = () => {
               <RiErrorWarningFill className="absolute -right-1 -top-1 h-4 w-4 text-text-warning-secondary" />
             </div>
             <p className="system-sm-medium text-text-primary">{t('licenseInactive', { ns: 'login' })}</p>
-            <p className="system-xs-regular mt-1 text-text-tertiary">{t('licenseInactiveTip', { ns: 'login' })}</p>
+            <p className="system-xs-regular mt-1 text-text-tertiary">{t('licenseInactiveTip', { ns: 'login', appName })}</p>
           </div>
         </div>
       </div>
@@ -104,8 +105,8 @@ const NormalForm = () => {
     <>
       <div className="mx-auto mt-8 w-full">
         <div className="mx-auto w-full">
-          <h2 className="title-4xl-semi-bold text-text-primary">{systemFeatures.branding.enabled ? t('pageTitleForE', { ns: 'login' }) : t('pageTitle', { ns: 'login' })}</h2>
-          <p className="body-md-regular mt-2 text-text-tertiary">{t('welcome', { ns: 'login' })}</p>
+          <h2 className="title-4xl-semi-bold text-text-primary">{systemFeatures.branding.enabled ? t('pageTitleForE', { ns: 'login' }) : t('pageTitle', { ns: 'login', appName })}</h2>
+          <p className="body-md-regular mt-2 text-text-tertiary">{t('welcome', { ns: 'login', appName })}</p>
         </div>
         <div className="relative">
           <div className="mt-6 flex flex-col gap-3">

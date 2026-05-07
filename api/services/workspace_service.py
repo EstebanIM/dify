@@ -4,8 +4,7 @@ from sqlalchemy import select
 from configs import dify_config
 from enums.cloud_plan import CloudPlan
 from extensions.ext_database import db
-from models.account import Tenant, TenantAccountJoin, TenantAccountRole
-from services.account_service import TenantService
+from models.account import Tenant, TenantAccountJoin
 from services.feature_service import FeatureService
 
 
@@ -36,7 +35,7 @@ class WorkspaceService:
         feature = FeatureService.get_features(tenant.id)
         can_replace_logo = feature.can_replace_logo
 
-        if can_replace_logo and TenantService.has_roles(tenant, [TenantAccountRole.OWNER, TenantAccountRole.ADMIN]):
+        if can_replace_logo:
             base_url = dify_config.FILES_URL
             replace_webapp_logo = (
                 f"{base_url}/files/workspaces/{tenant.id}/webapp-logo"
@@ -48,6 +47,7 @@ class WorkspaceService:
             tenant_info["custom_config"] = {
                 "remove_webapp_brand": remove_webapp_brand,
                 "replace_webapp_logo": replace_webapp_logo,
+                "replace_webapp_name": tenant.custom_config_dict.get("replace_webapp_name", ""),
             }
         if dify_config.EDITION == "CLOUD":
             tenant_info["next_credit_reset_date"] = feature.next_credit_reset_date

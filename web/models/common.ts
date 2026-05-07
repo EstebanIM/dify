@@ -112,6 +112,7 @@ export type ICurrentWorkspace = Omit<IWorkspace, 'current'> & {
   custom_config?: {
     remove_webapp_brand?: boolean
     replace_webapp_logo?: string
+    replace_webapp_name?: string
   }
 }
 

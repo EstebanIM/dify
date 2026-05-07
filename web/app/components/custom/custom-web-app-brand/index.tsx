@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import Button from '@/app/components/base/button'
 import Divider from '@/app/components/base/divider'
+import Input from '@/app/components/base/input'
 import Switch from '@/app/components/base/switch'
+import usePlatformName from '@/hooks/use-platform-name'
 import { cn } from '@/utils/classnames'
 import ChatPreviewCard from './components/chat-preview-card'
 import WorkflowPreviewCard from './components/workflow-preview-card'
@@ -11,6 +13,7 @@ const ALLOW_FILE_EXTENSIONS = ['svg', 'png']
 
 const CustomWebAppBrand = () => {
   const { t } = useTranslation()
+  const appName = usePlatformName()
   const {
     fileId,
     imgKey,
@@ -22,17 +25,59 @@ const CustomWebAppBrand = () => {
     workspaceLogo,
     isCurrentWorkspaceManager,
     isSandbox,
+    webappName,
+    nameDraft,
+    setNameDraft,
+    nameChanged,
     handleApply,
+    handleApplyName,
     handleCancel,
     handleChange,
     handleRestore,
+    handleRestoreName,
     handleSwitch,
   } = useWebAppBrand()
 
+  const nameDisabled = isSandbox || !isCurrentWorkspaceManager
+
   return (
     <div className="py-4">
+      {/* Platform name */}
+      <div className="mb-2 flex items-center justify-between rounded-xl bg-background-section-burn px-4 py-3">
+        <div className="shrink-0 pr-4">
+          <div className="text-text-primary system-md-medium">{t('webapp.changeName', { ns: 'custom' })}</div>
+          <div className="text-text-tertiary system-xs-regular">{t('webapp.changeNameTip', { ns: 'custom' })}</div>
+        </div>
+        <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
+          <Input
+            className="w-48"
+            value={nameDraft}
+            onChange={e => setNameDraft(e.target.value)}
+            placeholder={t('webapp.changeNamePlaceholder', { ns: 'custom' })}
+            maxLength={60}
+            disabled={nameDisabled}
+          />
+          {webappName && (
+            <Button
+              variant="ghost"
+              disabled={nameDisabled}
+              onClick={handleRestoreName}
+            >
+              {t('restore', { ns: 'custom' })}
+            </Button>
+          )}
+          <Button
+            variant="primary"
+            disabled={nameDisabled || !nameChanged || nameDraft.trim() === ''}
+            onClick={handleApplyName}
+          >
+            {t('apply', { ns: 'custom' })}
+          </Button>
+        </div>
+      </div>
+      {/* Remove brand switch */}
       <div className="mb-2 flex items-center justify-between rounded-xl bg-background-section-burn p-4 text-text-primary system-md-medium">
-        {t('webapp.removeBrand', { ns: 'custom' })}
+        {t('webapp.removeBrand', { ns: 'custom', appName })}
         <Switch
           size="lg"
           value={webappBrandRemoved ?? false}

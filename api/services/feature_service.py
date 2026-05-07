@@ -237,7 +237,31 @@ class FeatureService:
         if dify_config.MARKETPLACE_ENABLED:
             system_features.enable_marketplace = True
 
+        if dify_config.CAN_REPLACE_LOGO and not dify_config.ENTERPRISE_ENABLED:
+            cls._fulfill_branding_from_custom_config(system_features)
+
         return system_features
+
+    @classmethod
+    def _fulfill_branding_from_custom_config(cls, system_features: SystemFeatureModel) -> None:
+        from sqlalchemy import select
+
+        from extensions.ext_database import db
+        from models.account import Tenant
+
+        tenants = db.session.scalars(select(Tenant).where(Tenant.status == "normal").limit(2)).all()
+        if len(tenants) != 1:
+            return
+        tenant = tenants[0]
+        custom_name = tenant.custom_config_dict.get("replace_webapp_name")
+        if custom_name:
+            system_features.branding.application_title = custom_name
+
+        if not tenant.custom_config_dict.get("replace_webapp_logo"):
+            return
+        logo_url = f"{dify_config.FILES_URL}/files/workspaces/{tenant.id}/webapp-logo"
+        system_features.branding.workspace_logo = logo_url
+        system_features.branding.login_page_logo = logo_url
 
     @classmethod
     def _fulfill_system_params_from_env(cls, system_features: SystemFeatureModel):

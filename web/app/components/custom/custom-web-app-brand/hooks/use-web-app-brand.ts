@@ -26,6 +26,11 @@ const useWebAppBrand = () => {
   const webappBrandRemoved = currentWorkspace.custom_config?.remove_webapp_brand
   const uploadDisabled = isSandbox || webappBrandRemoved || !isCurrentWorkspaceManager
   const workspaceLogo = systemFeatures.branding.enabled ? systemFeatures.branding.workspace_logo : ''
+
+  const webappName = currentWorkspace.custom_config?.replace_webapp_name ?? ''
+  const [nameDraft, setNameDraft] = useState(webappName)
+  const nameChanged = nameDraft.trim() !== webappName
+
   const persistWorkspaceBrand = async (body: Record<string, unknown>) => {
     await updateCurrentWorkspace({
       url: CUSTOM_CONFIG_URL,
@@ -78,6 +83,14 @@ const useWebAppBrand = () => {
     setFileId('')
     setUploadProgress(0)
   }
+  const handleApplyName = async () => {
+    const trimmed = nameDraft.trim()
+    await persistWorkspaceBrand({ replace_webapp_name: trimmed })
+  }
+  const handleRestoreName = async () => {
+    setNameDraft('')
+    await persistWorkspaceBrand({ replace_webapp_name: '' })
+  }
   return {
     fileId,
     imgKey,
@@ -89,10 +102,16 @@ const useWebAppBrand = () => {
     workspaceLogo,
     isSandbox,
     isCurrentWorkspaceManager,
+    webappName,
+    nameDraft,
+    setNameDraft,
+    nameChanged,
     handleApply,
+    handleApplyName,
     handleCancel,
     handleChange,
     handleRestore,
+    handleRestoreName,
     handleSwitch,
   }
 }

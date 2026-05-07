@@ -1,5 +1,8 @@
 'use client'
 import type { FC } from 'react'
+import { useAppContext } from '@/context/app-context'
+import { useGlobalPublicStore } from '@/context/global-public-context'
+import usePlatformName from '@/hooks/use-platform-name'
 import useTheme from '@/hooks/use-theme'
 import { cn } from '@/utils/classnames'
 import { basePath } from '@/utils/var'
@@ -31,13 +34,35 @@ const DifyLogo: FC<DifyLogoProps> = ({
   className,
 }) => {
   const { theme } = useTheme()
+  const systemFeatures = useGlobalPublicStore(s => s.systemFeatures)
+  const { currentWorkspace } = useAppContext()
+  const platformName = usePlatformName()
+
+  // Precedence: enterprise branding → workspace custom_config (post-login) → systemFeatures logo populated
+  // from custom_config for pre-login pages (signin/install) → Dify SVG default.
+  const customLogoUrl
+    = (systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo)
+    || currentWorkspace.custom_config?.replace_webapp_logo
+    || systemFeatures.branding.workspace_logo
+    || ''
+
+  if (customLogoUrl) {
+    return (
+      <img
+        src={customLogoUrl}
+        className={cn('block object-contain', logoSizeMap[size], className)}
+        alt="logo"
+      />
+    )
+  }
+
   const themedStyle = (theme === 'dark' && style === 'default') ? 'monochromeWhite' : style
 
   return (
     <img
       src={`${basePath}${logoPathMap[themedStyle]}`}
       className={cn('block object-contain', logoSizeMap[size], className)}
-      alt="Dify logo"
+      alt={`${platformName} logo`}
     />
   )
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import Loading from '@/app/components/base/loading'
 import { useSelector as useAppContextWithSelector } from '@/context/app-context'
+import useDocumentTitle from '@/hooks/use-document-title'
 import { useDatasetList, useInvalidDatasetList } from '@/service/knowledge/use-dataset'
 import DatasetCard from './dataset-card'
 import NewDatasetCard from './new-dataset-card'
@@ -21,6 +22,7 @@ const Datasets = ({
 }: Props) => {
   const { t } = useTranslation()
   const isCurrentWorkspaceEditor = useAppContextWithSelector(state => state.isCurrentWorkspaceEditor)
+  useDocumentTitle(t('knowledge', { ns: 'dataset' }))
   const {
     data: datasetList,
     fetchNextPage,
@@ -38,9 +40,6 @@ const Datasets = ({
   const anchorRef = useRef<HTMLDivElement>(null)
   const observerRef = useRef<IntersectionObserver>(null)
 
-  useEffect(() => {
-    document.title = `${t('knowledge', { ns: 'dataset' })} - Dify`
-  }, [t])
 
   useEffect(() => {
     if (anchorRef.current) {

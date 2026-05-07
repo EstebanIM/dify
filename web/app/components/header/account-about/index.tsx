@@ -7,8 +7,7 @@ import Button from '@/app/components/base/button'
 import DifyLogo from '@/app/components/base/logo/dify-logo'
 import Modal from '@/app/components/base/modal'
 import { IS_CE_EDITION } from '@/config'
-import { useGlobalPublicStore } from '@/context/global-public-context'
-
+import usePlatformName from '@/hooks/use-platform-name'
 import Link from '@/next/link'
 
 type IAccountSettingProps = {
@@ -21,9 +20,8 @@ export default function AccountAbout({
   onCancel,
 }: IAccountSettingProps) {
   const { t } = useTranslation()
+  const platformName = usePlatformName()
   const isLatest = langGeniusVersionInfo.current_version === langGeniusVersionInfo.latest_version
-  const systemFeatures = useGlobalPublicStore(s => s.systemFeatures)
-
   return (
     <Modal
       isShow
@@ -35,15 +33,7 @@ export default function AccountAbout({
           <RiCloseLine className="h-4 w-4 text-text-tertiary" />
         </div>
         <div className="flex flex-col items-center gap-4 py-8">
-          {systemFeatures.branding.enabled && systemFeatures.branding.workspace_logo
-            ? (
-                <img
-                  src={systemFeatures.branding.workspace_logo}
-                  className="block h-7 w-auto object-contain"
-                  alt="logo"
-                />
-              )
-            : <DifyLogo size="large" className="mx-auto" />}
+          <DifyLogo size="large" className="mx-auto" />
 
           <div className="text-center text-xs font-normal text-text-tertiary">
             Version
@@ -76,8 +66,8 @@ export default function AccountAbout({
           <div className="text-xs font-medium text-text-tertiary">
             {
               isLatest
-                ? t('about.latestAvailable', { ns: 'common', version: langGeniusVersionInfo.latest_version })
-                : t('about.nowAvailable', { ns: 'common', version: langGeniusVersionInfo.latest_version })
+                ? t('about.latestAvailable', { ns: 'common', version: langGeniusVersionInfo.latest_version, appName: platformName })
+                : t('about.nowAvailable', { ns: 'common', version: langGeniusVersionInfo.latest_version, appName: platformName })
             }
           </div>
           <div className="flex items-center">
