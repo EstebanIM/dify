@@ -1,7 +1,7 @@
 {
   "about.changeLog": "Журнал изменений",
-  "about.latestAvailable": "Dify {{version}} - последняя доступная версия.",
-  "about.nowAvailable": "Dify {{version}} теперь доступен.",
+  "about.latestAvailable": "{{appName}} {{version}} - последняя доступная версия.",
+  "about.nowAvailable": "{{appName}} {{version}} теперь доступен.",
   "about.updateNow": "Обновить сейчас",
   "account.account": "Счет",
   "account.avatar": "Аватар",

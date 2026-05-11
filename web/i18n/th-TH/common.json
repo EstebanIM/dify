@@ -1,7 +1,7 @@
 {
   "about.changeLog": "บันทึกการเปลี่ยนแปลง",
-  "about.latestAvailable": "Dify {{version}} เป็นเวอร์ชันล่าสุดที่มี",
-  "about.nowAvailable": "Dify {{version}} พร้อมใช้งานแล้ว",
+  "about.latestAvailable": "{{appName}} {{version}} เป็นเวอร์ชันล่าสุดที่มี",
+  "about.nowAvailable": "{{appName}} {{version}} พร้อมใช้งานแล้ว",
   "about.updateNow": "อัพเดตเดี๋ยวนี้",
   "account.account": "บัญชี",
   "account.avatar": "อวตาร",

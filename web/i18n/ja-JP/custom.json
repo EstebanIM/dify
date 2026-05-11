@@ -17,6 +17,9 @@
   "uploading": "アップロード中",
   "webapp.changeLogo": "Powered by ブランド画像を変更",
   "webapp.changeLogoTip": "最小サイズ 40x40px の SVG または PNG 形式",
-  "webapp.removeBrand": "Powered by Dify を削除",
-  "webapp.title": "WebApp ブランドのカスタマイズ"
+  "webapp.removeBrand": "Powered by {{appName}} を削除",
+  "webapp.title": "WebApp ブランドのカスタマイズ",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

@@ -1,7 +1,7 @@
 {
   "about.changeLog": "変更ログ",
-  "about.latestAvailable": "Dify {{version}} が最新バージョンです。",
-  "about.nowAvailable": "Dify {{version}} が利用可能です。",
+  "about.latestAvailable": "{{appName}} {{version}} が最新バージョンです。",
+  "about.nowAvailable": "{{appName}} {{version}} が利用可能です。",
   "about.updateNow": "今すぐ更新",
   "account.account": "アカウント",
   "account.avatar": "アバター",

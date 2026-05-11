@@ -17,6 +17,9 @@
   "uploading": "Przesyłanie",
   "webapp.changeLogo": "Zmień obraz marki zasilany przez Brand",
   "webapp.changeLogoTip": "Format SVG lub PNG o minimalnym rozmiarze 40x40px",
-  "webapp.removeBrand": "Usuń zasilane przez Dify",
-  "webapp.title": "Dostosuj markę aplikacji internetowej"
+  "webapp.removeBrand": "Usuń zasilane przez {{appName}}",
+  "webapp.title": "Dostosuj markę aplikacji internetowej",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

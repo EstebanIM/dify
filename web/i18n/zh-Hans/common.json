@@ -1,7 +1,7 @@
 {
   "about.changeLog": "更新日志",
-  "about.latestAvailable": "Dify {{version}} 已是最新版本。",
-  "about.nowAvailable": "Dify {{version}} 现已可用。",
+  "about.latestAvailable": "{{appName}} {{version}} 已是最新版本。",
+  "about.nowAvailable": "{{appName}} {{version}} 现已可用。",
   "about.updateNow": "现在更新",
   "account.account": "账户",
   "account.avatar": "头像",

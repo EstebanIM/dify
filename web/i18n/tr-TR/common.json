@@ -1,7 +1,7 @@
 {
   "about.changeLog": "Değişiklik Günlüğü",
-  "about.latestAvailable": "Dify {{version}} en son mevcut sürüm.",
-  "about.nowAvailable": "Dify {{version}} şimdi mevcut.",
+  "about.latestAvailable": "{{appName}} {{version}} en son mevcut sürüm.",
+  "about.nowAvailable": "{{appName}} {{version}} şimdi mevcut.",
   "about.updateNow": "Şimdi güncelle",
   "account.account": "Hesap",
   "account.avatar": "Avatar",

@@ -1,7 +1,7 @@
 {
   "about.changeLog": "تغییرات",
-  "about.latestAvailable": "Dify {{version}} آخرین نسخه در دسترس است.",
-  "about.nowAvailable": "Dify {{version}} اکنون در دسترس است.",
+  "about.latestAvailable": "{{appName}} {{version}} آخرین نسخه در دسترس است.",
+  "about.nowAvailable": "{{appName}} {{version}} اکنون در دسترس است.",
   "about.updateNow": "به‌روزرسانی اکنون",
   "account.account": "حساب",
   "account.avatar": "آواتار",

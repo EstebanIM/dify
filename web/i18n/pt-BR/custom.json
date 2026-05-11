@@ -17,6 +17,9 @@
   "uploading": "Enviando",
   "webapp.changeLogo": "Alterar Imagem da Marca Powered by",
   "webapp.changeLogoTip": "Formato SVG ou PNG com tamanho mínimo de 40x40px",
-  "webapp.removeBrand": "Remover Powered by Dify",
-  "webapp.title": "Personalizar marca do web app"
+  "webapp.removeBrand": "Remover Powered by {{appName}}",
+  "webapp.title": "Personalizar marca do web app",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

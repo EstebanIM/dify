@@ -1,7 +1,7 @@
 {
   "about.changeLog": "Jurnal modificări",
-  "about.latestAvailable": "Dify {{version}} este ultima versiune disponibilă.",
-  "about.nowAvailable": "Dify {{version}} este acum disponibil.",
+  "about.latestAvailable": "{{appName}} {{version}} este ultima versiune disponibilă.",
+  "about.nowAvailable": "{{appName}} {{version}} este acum disponibil.",
   "about.updateNow": "Actualizați acum",
   "account.account": "Cont",
   "account.avatar": "Avatar",

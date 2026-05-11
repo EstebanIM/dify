@@ -1,7 +1,7 @@
 {
   "about.changeLog": "Registro delle modifiche",
-  "about.latestAvailable": "Dify {{version}} è l'ultima versione disponibile.",
-  "about.nowAvailable": "Dify {{version}} è ora disponibile.",
+  "about.latestAvailable": "{{appName}} {{version}} è l'ultima versione disponibile.",
+  "about.nowAvailable": "{{appName}} {{version}} è ora disponibile.",
   "about.updateNow": "Aggiorna ora",
   "account.account": "Conto",
   "account.avatar": "Avatar",

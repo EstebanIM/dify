@@ -1,7 +1,7 @@
 {
   "about.changeLog": "سجل التغييرات",
-  "about.latestAvailable": "Dify {{version}} هو أحدث إصدار متاح.",
-  "about.nowAvailable": "Dify {{version}} متاح الآن.",
+  "about.latestAvailable": "{{appName}} {{version}} هو أحدث إصدار متاح.",
+  "about.nowAvailable": "{{appName}} {{version}} متاح الآن.",
   "about.updateNow": "تحديث الآن",
   "account.account": "الحساب",
   "account.avatar": "الصورة الرمزية",

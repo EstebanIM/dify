@@ -1,7 +1,7 @@
 {
   "about.changeLog": "परिवर्तन लॉग",
-  "about.latestAvailable": "Dify {{version}} नवीनतम उपलब्ध संस्करण है।",
-  "about.nowAvailable": "Dify {{version}} अब उपलब्ध है।",
+  "about.latestAvailable": "{{appName}} {{version}} नवीनतम उपलब्ध संस्करण है।",
+  "about.nowAvailable": "{{appName}} {{version}} अब उपलब्ध है।",
   "about.updateNow": "अभी अपडेट करें",
   "account.account": "खाता",
   "account.avatar": "अवतार",

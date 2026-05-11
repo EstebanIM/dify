@@ -17,6 +17,9 @@
   "uploading": "Đang tải lên",
   "webapp.changeLogo": "Thay đổi logo \"Được hỗ trợ bởi\"",
   "webapp.changeLogoTip": "Định dạng SVG hoặc PNG với kích thước tối thiểu 40x40px",
-  "webapp.removeBrand": "Xóa \"Được hỗ trợ bởi Dify\"",
-  "webapp.title": "Tùy chỉnh thương hiệu web app"
+  "webapp.removeBrand": "Xóa \"Được hỗ trợ bởi {{appName}}\"",
+  "webapp.title": "Tùy chỉnh thương hiệu web app",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

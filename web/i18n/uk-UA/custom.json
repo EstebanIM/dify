@@ -17,6 +17,9 @@
   "uploading": "Завантаження",
   "webapp.changeLogo": "Змінити зображення бренду \"Powered by\"",
   "webapp.changeLogoTip": "Формат SVG або PNG з мінімальним розміром 40x40 пікселів",
-  "webapp.removeBrand": "Видалити Powered by Dify",
-  "webapp.title": "Налаштувати бренд для web app"
+  "webapp.removeBrand": "Видалити Powered by {{appName}}",
+  "webapp.title": "Налаштувати бренд для web app",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

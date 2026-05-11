@@ -1,7 +1,7 @@
 {
   "about.changeLog": "변경 로그",
-  "about.latestAvailable": "Dify {{version}} 최신 버전입니다.",
-  "about.nowAvailable": "Dify {{version}} 사용 가능합니다.",
+  "about.latestAvailable": "{{appName}} {{version}} 최신 버전입니다.",
+  "about.nowAvailable": "{{appName}} {{version}} 사용 가능합니다.",
   "about.updateNow": "지금 업데이트",
   "account.account": "계정",
   "account.avatar": "아바타",

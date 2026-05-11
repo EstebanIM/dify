@@ -17,6 +17,9 @@
   "uploading": "चढ़ाएं...",
   "webapp.changeLogo": "पावर्ड द्वारा ब्रांड छवि बदले",
   "webapp.changeLogoTip": "SVG या PNG प्रारूप के साथ न्यूनतम आकार 40x40px होना चाहिए",
-  "webapp.removeBrand": "पावर्ड द्वारा डिफी हटाएं",
-  "webapp.title": "web app का ब्रांड व्यक्तिकरण करें"
+  "webapp.removeBrand": "पावर्ड द्वारा {{appName}} हटाएं",
+  "webapp.title": "web app का ब्रांड व्यक्तिकरण करें",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

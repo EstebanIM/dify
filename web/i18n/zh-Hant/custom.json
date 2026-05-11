@@ -17,6 +17,9 @@
   "uploading": "上傳中",
   "webapp.changeLogo": "更改 Powered by Brand 圖片",
   "webapp.changeLogoTip": "SVG 或 PNG 格式，最小尺寸為 40x40px",
-  "webapp.removeBrand": "移除 Powered by Dify",
-  "webapp.title": "定製 web app 品牌"
+  "webapp.removeBrand": "移除 Powered by {{appName}}",
+  "webapp.title": "定製 web app 品牌",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

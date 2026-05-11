@@ -17,6 +17,9 @@
   "uploading": "Se încarcă",
   "webapp.changeLogo": "Schimbați imaginea mărcii \"Powered by\"",
   "webapp.changeLogoTip": "Format SVG sau PNG cu o dimensiune minimă de 40x40px",
-  "webapp.removeBrand": "Eliminați \"Powered by Dify\"",
-  "webapp.title": "Personalizați marca web app"
+  "webapp.removeBrand": "Eliminați \"Powered by {{appName}}\"",
+  "webapp.title": "Personalizați marca web app",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

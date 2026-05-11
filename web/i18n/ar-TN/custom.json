@@ -17,6 +17,9 @@
   "uploading": "جاري التحميل",
   "webapp.changeLogo": "تغيير صورة Powered by Brand",
   "webapp.changeLogoTip": "تنسيق SVG أو PNG بحجم أدنى 40x40px",
-  "webapp.removeBrand": "إزالة Powered by Dify",
-  "webapp.title": "تخصيص العلامة التجارية لتطبيق الويب"
+  "webapp.removeBrand": "إزالة Powered by {{appName}}",
+  "webapp.title": "تخصيص العلامة التجارية لتطبيق الويب",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

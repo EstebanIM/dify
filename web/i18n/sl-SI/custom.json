@@ -17,6 +17,9 @@
   "uploading": "Nalagam",
   "webapp.changeLogo": "Spremeni sliko Powered by Brand",
   "webapp.changeLogoTip": "Format SVG ali PNG z minimalno velikostjo 40x40px",
-  "webapp.removeBrand": "Odstrani Powered by Dify",
-  "webapp.title": "Prilagodi blagovno znamko spletne aplikacije"
+  "webapp.removeBrand": "Odstrani Powered by {{appName}}",
+  "webapp.title": "Prilagodi blagovno znamko spletne aplikacije",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

@@ -17,6 +17,9 @@
   "uploading": "Mengunggah...",
   "webapp.changeLogo": "Ubah Logo Merek",
   "webapp.changeLogoTip": "Format SVG atau PNG dengan ukuran minimum 40x40px",
-  "webapp.removeBrand": "Hapus Branding Dify",
-  "webapp.title": "Kustomisasi Branding Aplikasi Web"
+  "webapp.removeBrand": "Hapus Branding {{appName}}",
+  "webapp.title": "Kustomisasi Branding Aplikasi Web",
+  "webapp.changeName": "Change Platform Name",
+  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

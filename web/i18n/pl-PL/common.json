@@ -1,7 +1,7 @@
 {
   "about.changeLog": "Dziennik zmian",
-  "about.latestAvailable": "Dify {{version}} jest najnowszą dostępną wersją.",
-  "about.nowAvailable": "Dify {{version}} jest teraz dostępny.",
+  "about.latestAvailable": "{{appName}} {{version}} jest najnowszą dostępną wersją.",
+  "about.nowAvailable": "{{appName}} {{version}} jest teraz dostępny.",
   "about.updateNow": "Aktualizuj teraz",
   "account.account": "Rachunek",
   "account.avatar": "Awatar",
