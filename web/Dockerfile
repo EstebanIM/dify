@@ -9,7 +9,9 @@ LABEL maintainer="takatost@gmail.com"
 # RUN npm config set registry https://registry.npmmirror.com
 
 RUN apk add --no-cache tzdata
-RUN corepack enable
+ENV COREPACK_NPM_REGISTRY=https://registry.npmmirror.com
+ENV npm_config_registry=https://registry.npmmirror.com
+RUN npm config set registry https://registry.npmmirror.com && corepack enable
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 ARG NEXT_PUBLIC_BASE_PATH=""

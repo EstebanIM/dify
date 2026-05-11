@@ -88,7 +88,7 @@
   "overview.appInfo.settings.more.entry": "Daha fazla ayarı göster",
   "overview.appInfo.settings.more.privacyPolicy": "Gizlilik Politikası",
   "overview.appInfo.settings.more.privacyPolicyPlaceholder": "Gizlilik politikası bağlantısını girin",
-  "overview.appInfo.settings.more.privacyPolicyTip": "Ziyaretçilerin uygulamanın topladığı verileri anlamalarına yardımcı olur, Dify'nin <privacyPolicyLink>Gizlilik Politikası</privacyPolicyLink>'na bakın.",
+  "overview.appInfo.settings.more.privacyPolicyTip": "Ziyaretçilerin uygulamanın topladığı verileri anlamalarına yardımcı olur, {{appName}}'nin <privacyPolicyLink>Gizlilik Politikası</privacyPolicyLink>'na bakın.",
   "overview.appInfo.settings.sso.description": "Tüm kullanıcıların web app'i kullanmadan önce SSO ile oturum açmaları gerekir",
   "overview.appInfo.settings.sso.label": "SSO Kimlik Doğrulaması",
   "overview.appInfo.settings.sso.title": "web app SSO'su",

@@ -1,1 +1,4 @@
 docker/volumes/
+docker/volumes/**
+**/.venv/
+**/node_modules/

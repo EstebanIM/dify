@@ -88,7 +88,7 @@
   "overview.appInfo.settings.more.entry": "Mehr Einstellungen anzeigen",
   "overview.appInfo.settings.more.privacyPolicy": "Datenschutzrichtlinie",
   "overview.appInfo.settings.more.privacyPolicyPlaceholder": "Geben Sie den Link zur Datenschutzrichtlinie ein",
-  "overview.appInfo.settings.more.privacyPolicyTip": "Hilft Besuchern zu verstehen, welche Daten die Anwendung sammelt, siehe Difys <privacyPolicyLink>Datenschutzrichtlinie</privacyPolicyLink>.",
+  "overview.appInfo.settings.more.privacyPolicyTip": "Hilft Besuchern zu verstehen, welche Daten die Anwendung sammelt, siehe {{appName}}s <privacyPolicyLink>Datenschutzrichtlinie</privacyPolicyLink>.",
   "overview.appInfo.settings.sso.description": "Alle Benutzer müssen sich mit SSO anmelden, bevor sie web app verwenden können",
   "overview.appInfo.settings.sso.label": "SSO-Authentifizierung",
   "overview.appInfo.settings.sso.title": "web app SSO",

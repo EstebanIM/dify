@@ -20,6 +20,6 @@
   "webapp.removeBrand": "पावर्ड द्वारा {{appName}} हटाएं",
   "webapp.title": "web app का ब्रांड व्यक्तिकरण करें",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

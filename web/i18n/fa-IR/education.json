@@ -2,7 +2,7 @@
   "applied.activeSubscription.description": "شما یک اشتراک فعال دارید. پس از انقضای اشتراک می‌توانید از تخفیف آموزشی استفاده کنید. اشتراک خود را در <stripeLink>Stripe</stripeLink> تأیید کنید.",
   "applied.description": "تبریک می‌گوییم! درخواست تخفیف آموزشی شما با موفقیت ثبت شد.",
   "applied.noPaymentPermission.description": "شما در این workspace مجوز پرداخت ندارید. لطفاً به workspace‌ای بروید که بتوانید صورتحساب را مدیریت کنید تا از تخفیف آموزشی استفاده کنید.",
-  "applied.noPaymentPermission.returnHome": "بازگشت به Dify",
+  "applied.noPaymentPermission.returnHome": "بازگشت به {{appName}}",
   "applied.step1.description": "درخواست تخفیف آموزشی شما با موفقیت ثبت شد.",
   "applied.step1.title": "مرحله ۱",
   "applied.step2.description": "workspace‌ای را که می‌خواهید با تخفیف آموزشی استفاده کنید انتخاب کنید.",

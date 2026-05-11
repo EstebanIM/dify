@@ -98,7 +98,7 @@ export const defaultSystemFeatures: SystemFeatures = {
     login_page_logo: '',
     workspace_logo: '',
     favicon: '',
-    application_title: 'test title',
+    application_title: '',
   },
   webapp_auth: {
     enabled: false,

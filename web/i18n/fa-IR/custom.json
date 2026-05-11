@@ -20,6 +20,6 @@
   "webapp.removeBrand": "حذف \"Powered by {{appName}}\"",
   "webapp.title": "سفارشی سازی برند وب اپ",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

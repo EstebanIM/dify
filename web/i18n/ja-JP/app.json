@@ -236,7 +236,7 @@
   "switchTipStart": "新しいアプリのコピーが作成され、新しいコピーがワークフロー オーケストレートに切り替わります。新しいコピーは ",
   "theme.switchDark": "ダークテーマに切り替え",
   "theme.switchLight": "ライトテーマに切り替え",
-  "tracing.aliyun.description": "Alibaba Cloud が提供する完全管理型でメンテナンスフリーの可観測性プラットフォームは、Dify アプリケーションの即時監視、トレース、評価を可能にします。",
+  "tracing.aliyun.description": "Alibaba Cloud が提供する完全管理型でメンテナンスフリーの可観測性プラットフォームは、{{appName}} アプリケーションの即時監視、トレース、評価を可能にします。",
   "tracing.aliyun.title": "クラウドモニター",
   "tracing.arize.description": "エンタープライズグレードのLLM可観測性、オンラインおよびオフライン評価、モニタリング、実験—OpenTelemetryによって支えられています。LLMおよびエージェント駆動型アプリケーション向けに特別に設計されています。",
   "tracing.arize.title": "Arize",

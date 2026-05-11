@@ -97,7 +97,7 @@
   "createTool.toolOutput.title": "도구 출력",
   "createTool.urlError": "유효한 URL 을 입력하세요",
   "createTool.viewSchemaSpec": "OpenAPI-Swagger 명세 보기",
-  "customToolTip": "Dify 커스텀 도구에 대해 더 알아보기",
+  "customToolTip": "{{appName}} 커스텀 도구에 대해 더 알아보기",
   "howToGet": "획득 방법",
   "includeToolNum": "{{num}} {{action}} 포함됨",
   "mcp.authorize": "권한 부여",

@@ -20,6 +20,6 @@
   "webapp.removeBrand": "Xóa \"Được hỗ trợ bởi {{appName}}\"",
   "webapp.title": "Tùy chỉnh thương hiệu web app",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

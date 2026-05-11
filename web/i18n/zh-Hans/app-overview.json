@@ -88,7 +88,7 @@
   "overview.appInfo.settings.more.entry": "展示更多设置",
   "overview.appInfo.settings.more.privacyPolicy": "隐私政策",
   "overview.appInfo.settings.more.privacyPolicyPlaceholder": "请输入隐私政策链接",
-  "overview.appInfo.settings.more.privacyPolicyTip": "帮助访问者了解该应用收集的数据，可参考 Dify 的<privacyPolicyLink>隐私政策</privacyPolicyLink>。",
+  "overview.appInfo.settings.more.privacyPolicyTip": "帮助访问者了解该应用收集的数据，可参考 {{appName}} 的<privacyPolicyLink>隐私政策</privacyPolicyLink>。",
   "overview.appInfo.settings.sso.description": "启用后，所有用户都需要先进行 SSO 认证才能访问",
   "overview.appInfo.settings.sso.label": "单点登录认证",
   "overview.appInfo.settings.sso.title": "web app SSO 认证",

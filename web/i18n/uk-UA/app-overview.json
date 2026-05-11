@@ -88,7 +88,7 @@
   "overview.appInfo.settings.more.entry": "Показати додаткові налаштування",
   "overview.appInfo.settings.more.privacyPolicy": "Політика конфіденційності",
   "overview.appInfo.settings.more.privacyPolicyPlaceholder": "Введіть посилання на політику конфіденційності",
-  "overview.appInfo.settings.more.privacyPolicyTip": "Допомагає відвідувачам зрозуміти дані, зібрані додатком, див. <privacyPolicyLink>Політику конфіденційності</privacyPolicyLink> Dify.",
+  "overview.appInfo.settings.more.privacyPolicyTip": "Допомагає відвідувачам зрозуміти дані, зібрані додатком, див. <privacyPolicyLink>Політику конфіденційності</privacyPolicyLink> {{appName}}.",
   "overview.appInfo.settings.sso.description": "Усі користувачі повинні увійти в систему за допомогою єдиного входу перед використанням web app",
   "overview.appInfo.settings.sso.label": "Автентифікація за допомогою єдиного входу",
   "overview.appInfo.settings.sso.title": "Єдиний вхід для web app",

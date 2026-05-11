@@ -170,6 +170,7 @@ const CustomWebAppBrand = () => {
           workspaceLogo={workspaceLogo}
           webappLogo={webappLogo}
           imgKey={imgKey}
+          previewName={nameDraft.trim() || appName}
         />
         <WorkflowPreviewCard
           webappBrandRemoved={webappBrandRemoved}

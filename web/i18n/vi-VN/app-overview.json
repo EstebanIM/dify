@@ -88,7 +88,7 @@
   "overview.appInfo.settings.more.entry": "Hiển thị thêm cài đặt",
   "overview.appInfo.settings.more.privacyPolicy": "Chính sách bảo mật",
   "overview.appInfo.settings.more.privacyPolicyPlaceholder": "Nhập liên kết chính sách bảo mật",
-  "overview.appInfo.settings.more.privacyPolicyTip": "Giúp người dùng hiểu dữ liệu mà ứng dụng thu thập, xem <privacyPolicyLink>Chính sách bảo mật</privacyPolicyLink> của Dify.",
+  "overview.appInfo.settings.more.privacyPolicyTip": "Giúp người dùng hiểu dữ liệu mà ứng dụng thu thập, xem <privacyPolicyLink>Chính sách bảo mật</privacyPolicyLink> của {{appName}}.",
   "overview.appInfo.settings.sso.description": "Tất cả người dùng được yêu cầu đăng nhập bằng SSO trước khi sử dụng web app",
   "overview.appInfo.settings.sso.label": "Xác thực SSO",
   "overview.appInfo.settings.sso.title": "SSO ứng dụng web",

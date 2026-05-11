@@ -11,6 +11,7 @@ export function getInitOptions(): InitOptions {
     ns: namespaces,
     interpolation: {
       escapeValue: false,
+      skipOnVariables: true,
     },
   }
 }

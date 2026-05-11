@@ -20,6 +20,6 @@
   "webapp.removeBrand": "移除 Powered by {{appName}}",
   "webapp.title": "定製 web app 品牌",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

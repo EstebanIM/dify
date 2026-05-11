@@ -1,5 +1,6 @@
 import { Button } from '@langgenius/dify-ui/button'
 import { cn } from '@langgenius/dify-ui/cn'
+import { useTranslation } from 'react-i18next'
 import PoweredByBrand from './powered-by-brand'
 
 type ChatPreviewCardProps = {
@@ -7,6 +8,7 @@ type ChatPreviewCardProps = {
   workspaceLogo?: string
   webappLogo?: string
   imgKey: number
+  previewName?: string
 }
 
 const ChatPreviewCard = ({
@@ -14,7 +16,16 @@ const ChatPreviewCard = ({
   workspaceLogo,
   webappLogo,
   imgKey,
+  previewName,
 }: ChatPreviewCardProps) => {
+  const { t } = useTranslation()
+  // When previewName is supplied (live edit of the name input), override the
+  // i18next {{appName}} placeholder so the preview reflects keystrokes in real
+  // time. Otherwise let the postProcessor fill in the saved platform name.
+  const placeholder = previewName
+    ? t('webapp.chatPreviewPlaceholder', { ns: 'custom', appName: previewName })
+    : t('webapp.chatPreviewPlaceholder', { ns: 'custom' })
+
   return (
     <div className="flex h-[320px] grow basis-1/2 overflow-hidden rounded-2xl border-[0.5px] border-components-panel-border-subtle bg-background-default-burn">
       <div className="flex h-full w-[232px] shrink-0 flex-col p-1 pr-0">
@@ -68,7 +79,7 @@ const ChatPreviewCard = ({
               <div className="h-2 w-[144px] rounded-xs bg-text-quaternary opacity-20"></div>
             </Button>
           </div>
-          <div className="flex h-[52px] w-[578px] items-center rounded-xl border border-components-chat-input-border bg-components-panel-bg-blur pl-3.5 body-lg-regular text-text-placeholder shadow-md backdrop-blur-xs">Talk to Dify</div>
+          <div className="flex h-[52px] w-[578px] items-center rounded-xl border border-components-chat-input-border bg-components-panel-bg-blur pl-3.5 body-lg-regular text-text-placeholder shadow-md backdrop-blur-xs">{placeholder}</div>
         </div>
       </div>
     </div>

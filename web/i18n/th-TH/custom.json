@@ -20,6 +20,6 @@
   "webapp.removeBrand": "ลบ ขับเคลื่อนโดย {{appName}}",
   "webapp.title": "ปรับแต่งแบรนด์ web app",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

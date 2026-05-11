@@ -20,6 +20,6 @@
   "webapp.removeBrand": "Usuń zasilane przez {{appName}}",
   "webapp.title": "Dostosuj markę aplikacji internetowej",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

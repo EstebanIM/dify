@@ -20,6 +20,6 @@
   "webapp.removeBrand": "Odstrani Powered by {{appName}}",
   "webapp.title": "Prilagodi blagovno znamko spletne aplikacije",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps"
 }

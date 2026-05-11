@@ -4,6 +4,7 @@ import type { Resource } from 'i18next'
 import type { Locale } from '@/i18n-config'
 import { I18nextProvider } from 'react-i18next'
 import { createI18nextInstance } from '@/i18n-config/client'
+import { PlatformNameSync } from './platform-name-sync'
 
 export function I18nClientProvider({
   locale,
@@ -18,6 +19,7 @@ export function I18nClientProvider({
 
   return (
     <I18nextProvider i18n={i18n}>
+      <PlatformNameSync />
       {children}
     </I18nextProvider>
   )

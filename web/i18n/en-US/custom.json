@@ -18,8 +18,9 @@
   "webapp.changeLogo": "Change Powered by Brand Image",
   "webapp.changeLogoTip": "SVG or PNG format with a minimum size of 40x40px",
   "webapp.changeName": "Change Platform Name",
-  "webapp.changeNamePlaceholder": "Dify",
+  "webapp.changeNamePlaceholder": "{{appName}}",
   "webapp.changeNameTip": "Displayed across the dashboard and embedded webapps",
+  "webapp.chatPreviewPlaceholder": "Talk to {{appName}}",
   "webapp.removeBrand": "Remove Powered by {{appName}}",
   "webapp.title": "Customize web app brand"
 }
