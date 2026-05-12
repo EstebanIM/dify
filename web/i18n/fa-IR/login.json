@@ -26,6 +26,7 @@
   "confirmPassword": "تایید رمز عبور",
   "confirmPasswordPlaceholder": "رمز عبور جدید خود را تایید کنید",
   "continueWithCode": "با کد ادامه دهید",
+  "copyright": "© {{year}} {{appName}}. تمامی حقوق محفوظ است.",
   "createAndSignIn": "ایجاد و ورود",
   "createSample": "بر اساس این اطلاعات، ما برای شما یک نمونه برنامه ایجاد خواهیم کرد",
   "dontHave": "ندارید؟",

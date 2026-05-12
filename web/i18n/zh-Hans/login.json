@@ -26,6 +26,7 @@
   "confirmPassword": "确认密码",
   "confirmPasswordPlaceholder": "确认您的新密码",
   "continueWithCode": "发送验证码",
+  "copyright": "© {{year}} {{appName}}. 保留所有权利。",
   "createAndSignIn": "创建账户",
   "createSample": "基于这些信息，我们将为您创建一个示例应用",
   "dontHave": "还没有邀请码？",

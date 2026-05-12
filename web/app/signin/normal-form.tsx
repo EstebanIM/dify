@@ -13,6 +13,7 @@ import { invitationCheck } from '@/service/common'
 import { systemFeaturesQueryOptions } from '@/service/system-features'
 import { isLegacyBase401, userProfileQueryOptions } from '@/service/use-common'
 import { LicenseStatus } from '@/types/feature'
+import { fetchSetupStatusWithCache } from '@/utils/setup-status'
 import Loading from '../components/base/loading'
 import MailAndCodeAuth from './components/mail-and-code-auth'
 import MailAndPasswordAuth from './components/mail-and-password-auth'
@@ -40,6 +41,14 @@ const NormalForm = () => {
   const [isRedirecting, setIsRedirecting] = useState(false)
   const isLoading = isCheckLoading || isInitCheckLoading || isRedirecting
   const { data: systemFeatures } = useSuspenseQuery(systemFeaturesQueryOptions())
+  // Only fetch setup status in CE editions; we use it to hide the "init admin" hint
+  // once an admin account already exists. Cached in localStorage by the helper.
+  const { data: setupStatus } = useQuery({
+    queryKey: ['setup-status'],
+    queryFn: fetchSetupStatusWithCache,
+    enabled: IS_CE_EDITION,
+    staleTime: Infinity,
+  })
   const [authType, updateAuthType] = useState<'code' | 'password'>('password')
   const [showORLine, setShowORLine] = useState(false)
   const [allMethodsAreDisabled, setAllMethodsAreDisabled] = useState(false)
@@ -243,42 +252,17 @@ const NormalForm = () => {
               </div>
             </>
           )}
-          {!systemFeatures.branding.enabled && (
-            <>
-              <div className="mt-2 block w-full system-xs-regular text-text-tertiary">
-                {t('tosDesc', { ns: 'login' })}
+          {!systemFeatures.branding.enabled && IS_CE_EDITION && setupStatus?.step !== 'finished' && (
+            <div className="mt-2 block w-full system-xs-regular text-text-tertiary">
+              {t('goToInit', { ns: 'login' })}
               &nbsp;
-                <Link
-                  className="system-xs-medium text-text-secondary hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://dify.ai/terms"
-                >
-                  {t('tos', { ns: 'login' })}
-                </Link>
-              &nbsp;&&nbsp;
-                <Link
-                  className="system-xs-medium text-text-secondary hover:underline"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://dify.ai/privacy"
-                >
-                  {t('pp', { ns: 'login' })}
-                </Link>
-              </div>
-              {IS_CE_EDITION && (
-                <div className="w-hull mt-2 block system-xs-regular text-text-tertiary">
-                  {t('goToInit', { ns: 'login' })}
-              &nbsp;
-                  <Link
-                    className="system-xs-medium text-text-secondary hover:underline"
-                    href="/install"
-                  >
-                    {t('setAdminAccount', { ns: 'login' })}
-                  </Link>
-                </div>
-              )}
-            </>
+              <Link
+                className="system-xs-medium text-text-secondary hover:underline"
+                href="/install"
+              >
+                {t('setAdminAccount', { ns: 'login' })}
+              </Link>
+            </div>
           )}
         </div>
       </div>

@@ -26,6 +26,7 @@
   "confirmPassword": "Potrdite geslo",
   "confirmPasswordPlaceholder": "Potrdite svoje novo geslo",
   "continueWithCode": "Nadaljujte s kodo",
+  "copyright": "© {{year}} {{appName}}. Vse pravice pridržane.",
   "createAndSignIn": "Ustvari in prijavi se",
   "createSample": "Na podlagi teh informacij bomo za vas ustvarili vzorčno aplikacijo",
   "dontHave": "Nimate?",

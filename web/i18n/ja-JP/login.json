@@ -26,6 +26,7 @@
   "confirmPassword": "パスワードを確認",
   "confirmPasswordPlaceholder": "新しいパスワードを確認してください",
   "continueWithCode": "認証コードで続行",
+  "copyright": "© {{year}} {{appName}}. All rights reserved.",
   "createAndSignIn": "作成してサインイン",
   "createSample": "この情報を基に、サンプルアプリケーションを作成します",
   "dontHave": "お持ちでない場合",

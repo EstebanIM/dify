@@ -26,6 +26,7 @@
   "confirmPassword": "Confirm Password",
   "confirmPasswordPlaceholder": "Confirm your new password",
   "continueWithCode": "Continue With Code",
+  "copyright": "© {{year}} {{appName}}. Alle rechten voorbehouden.",
   "createAndSignIn": "Create and sign in",
   "createSample": "Based on this information, we'll create sample application for you",
   "dontHave": "Don't have?",

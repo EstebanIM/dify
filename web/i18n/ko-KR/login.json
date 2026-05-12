@@ -26,6 +26,7 @@
   "confirmPassword": "비밀번호 확인",
   "confirmPasswordPlaceholder": "새 비밀번호를 확인하세요",
   "continueWithCode": "코드로 계속하기",
+  "copyright": "© {{year}} {{appName}}. All rights reserved.",
   "createAndSignIn": "계정 생성 및 로그인",
   "createSample": "이 정보를 기반으로 샘플 앱을 생성합니다.",
   "dontHave": "계정이 없으신가요?",

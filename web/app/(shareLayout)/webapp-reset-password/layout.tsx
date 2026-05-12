@@ -2,10 +2,12 @@
 import { cn } from '@langgenius/dify-ui/cn'
 
 import { useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 import Header from '@/app/signin/_header'
 import { systemFeaturesQueryOptions } from '@/service/system-features'
 
 export default function SignInLayout({ children }: any) {
+  const { t } = useTranslation()
   const { data: systemFeatures } = useSuspenseQuery(systemFeaturesQueryOptions())
   return (
     <>
@@ -26,11 +28,7 @@ export default function SignInLayout({ children }: any) {
           </div>
           {!systemFeatures.branding.enabled && (
             <div className="px-8 py-6 system-xs-regular text-text-tertiary">
-              ©
-              {' '}
-              {new Date().getFullYear()}
-              {' '}
-              LangGenius, Inc. All rights reserved.
+              {t('copyright', { ns: 'login', year: new Date().getFullYear() })}
             </div>
           )}
         </div>

@@ -10,11 +10,9 @@ import { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Input from '@/app/components/base/input'
 import Loading from '@/app/components/base/loading'
-import { LICENSE_LINK } from '@/constants/link'
 import usePlatformName from '@/hooks/use-platform-name'
 import { setLocaleOnClient } from '@/i18n-config'
 import { languages, LanguagesSupported } from '@/i18n-config/language'
-import Link from '@/next/link'
 import { useRouter, useSearchParams } from '@/next/navigation'
 import { activateMember } from '@/service/common'
 import { systemFeaturesQueryOptions } from '@/service/system-features'
@@ -189,20 +187,6 @@ export default function InviteSettingsPage() {
           </Button>
         </div>
       </form>
-      {!systemFeatures.branding.enabled && (
-        <div className="mt-2 block w-full system-xs-regular text-text-tertiary">
-          {t('license.tip', { ns: 'login', appName })}
-      &nbsp;
-          <Link
-            className="system-xs-medium text-text-accent-secondary"
-            target="_blank"
-            rel="noopener noreferrer"
-            href={LICENSE_LINK}
-          >
-            {t('license.link', { ns: 'login' })}
-          </Link>
-        </div>
-      )}
     </div>
   )
 }

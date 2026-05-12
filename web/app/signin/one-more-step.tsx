@@ -7,10 +7,8 @@ import { Select, SelectContent, SelectItem, SelectItemIndicator, SelectItemText,
 import { toast } from '@langgenius/dify-ui/toast'
 import { useReducer } from 'react'
 import { useTranslation } from 'react-i18next'
-import { LICENSE_LINK } from '@/constants/link'
 import usePlatformName from '@/hooks/use-platform-name'
 import { languages } from '@/i18n-config/language'
-import Link from '@/next/link'
 import { useRouter, useSearchParams } from '@/next/navigation'
 import { useOneMoreStep } from '@/service/use-common'
 import { timezones } from '@/utils/timezone'
@@ -200,18 +198,6 @@ const OneMoreStep = () => {
             >
               {t('go', { ns: 'login', appName })}
             </Button>
-          </div>
-          <div className="mt-2 block w-full system-xs-regular text-text-tertiary">
-            {t('license.tip', { ns: 'login', appName })}
-            &nbsp;
-            <Link
-              className="system-xs-medium text-text-accent-secondary"
-              target="_blank"
-              rel="noopener noreferrer"
-              href={LICENSE_LINK}
-            >
-              {t('license.link', { ns: 'login' })}
-            </Link>
           </div>
         </div>
       </div>

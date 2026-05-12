@@ -26,6 +26,7 @@
   "confirmPassword": "تأكيد كلمة المرور",
   "confirmPasswordPlaceholder": "تأكيد كلمة المرور الجديدة",
   "continueWithCode": "المتابعة مع الرمز",
+  "copyright": "© {{year}} {{appName}}. جميع الحقوق محفوظة.",
   "createAndSignIn": "إنشاء وتسجيل الدخول",
   "createSample": "بناءً على هذه المعلومات، سنقوم بإنشاء تطبيق تجريبي لك",
   "dontHave": "ليس لديك؟",

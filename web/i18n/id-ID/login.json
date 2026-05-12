@@ -26,6 +26,7 @@
   "confirmPassword": "Konfirmasi Kata Sandi",
   "confirmPasswordPlaceholder": "Konfirmasikan kata sandi baru Anda",
   "continueWithCode": "Lanjutkan dengan kode",
+  "copyright": "© {{year}} {{appName}}. Hak cipta dilindungi.",
   "createAndSignIn": "Buat dan masuk",
   "createSample": "Berdasarkan informasi ini, kami akan membuat contoh aplikasi untuk Anda",
   "dontHave": "Belum?",

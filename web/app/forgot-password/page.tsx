@@ -2,6 +2,7 @@
 import { cn } from '@langgenius/dify-ui/cn'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import ChangePasswordForm from '@/app/forgot-password/ChangePasswordForm'
 import useDocumentTitle from '@/hooks/use-document-title'
 import { useSearchParams } from '@/next/navigation'
@@ -10,6 +11,7 @@ import Header from '../signin/_header'
 import ForgotPasswordForm from './ForgotPasswordForm'
 
 const ForgotPassword = () => {
+  const { t } = useTranslation()
   useDocumentTitle('')
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
@@ -22,11 +24,7 @@ const ForgotPassword = () => {
         {token ? <ChangePasswordForm /> : <ForgotPasswordForm />}
         {!systemFeatures.branding.enabled && (
           <div className="px-8 py-6 text-sm font-normal text-text-tertiary">
-            ©
-            {' '}
-            {new Date().getFullYear()}
-            {' '}
-            LangGenius, Inc. All rights reserved.
+            {t('copyright', { ns: 'login', year: new Date().getFullYear() })}
           </div>
         )}
       </div>

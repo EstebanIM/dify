@@ -26,6 +26,7 @@
   "confirmPassword": "Confirmă parola",
   "confirmPasswordPlaceholder": "Confirmați noua parolă",
   "continueWithCode": "Continuați cu codul",
+  "copyright": "© {{year}} {{appName}}. Toate drepturile rezervate.",
   "createAndSignIn": "Creează și autentifică-te",
   "createSample": "Pe baza acestor informații, vom crea o aplicație de exemplu pentru tine",
   "dontHave": "Nu ai?",

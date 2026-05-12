@@ -26,6 +26,7 @@
   "confirmPassword": "Xác nhận mật khẩu",
   "confirmPasswordPlaceholder": "Nhập lại mật khẩu mới của bạn",
   "continueWithCode": "Tiếp tục với mã",
+  "copyright": "© {{year}} {{appName}}. Đã đăng ký bản quyền.",
   "createAndSignIn": "Tạo và đăng nhập",
   "createSample": "Dựa trên thông tin này, chúng tôi sẽ tạo một ứng dụng mẫu cho bạn",
   "dontHave": "Chưa có tài khoản?",

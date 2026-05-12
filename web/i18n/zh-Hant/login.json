@@ -26,6 +26,7 @@
   "confirmPassword": "確認密碼",
   "confirmPasswordPlaceholder": "確認您的新密碼",
   "continueWithCode": "Continue With Code",
+  "copyright": "© {{year}} {{appName}}. 版權所有。",
   "createAndSignIn": "建立賬戶",
   "createSample": "基於這些資訊，我們將為您建立一個示例應用",
   "dontHave": "還沒有邀請碼？",

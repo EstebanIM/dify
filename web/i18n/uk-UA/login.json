@@ -26,6 +26,7 @@
   "confirmPassword": "Підтвердити пароль",
   "confirmPasswordPlaceholder": "Підтвердьте новий пароль",
   "continueWithCode": "Продовжити з кодом",
+  "copyright": "© {{year}} {{appName}}. Усі права захищені.",
   "createAndSignIn": "Створити та увійти",
   "createSample": "На основі цієї інформації ми створимо для вас зразок програми",
   "dontHave": "Не маєте?",

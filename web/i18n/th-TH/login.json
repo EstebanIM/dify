@@ -26,6 +26,7 @@
   "confirmPassword": "ยืนยันรหัสผ่าน",
   "confirmPasswordPlaceholder": "ยืนยันรหัสผ่านใหม่ของคุณ",
   "continueWithCode": "ดําเนินการต่อด้วยรหัส",
+  "copyright": "© {{year}} {{appName}}. สงวนลิขสิทธิ์",
   "createAndSignIn": "สร้างและลงชื่อเข้าใช้",
   "createSample": "จากข้อมูลนี้ เราจะสร้างแอปพลิเคชันตัวอย่างสําหรับคุณ",
   "dontHave": "ไม่มี?",

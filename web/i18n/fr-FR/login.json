@@ -26,6 +26,7 @@
   "confirmPassword": "Confirmez le mot de passe",
   "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
   "continueWithCode": "Continuer avec le code",
+  "copyright": "© {{year}} {{appName}}. Tous droits réservés.",
   "createAndSignIn": "Créer et se connecter",
   "createSample": "Sur la base de ces informations, nous créerons une application exemple pour vous",
   "dontHave": "Vous n'avez pas ?",

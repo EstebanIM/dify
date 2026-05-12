@@ -23,11 +23,7 @@ export default function SignInLayout({ children }: PropsWithChildren) {
           </div>
           {systemFeatures.branding.enabled === false && (
             <div className="px-8 py-6 system-xs-regular text-text-tertiary">
-              ©
-              {' '}
-              {new Date().getFullYear()}
-              {' '}
-              LangGenius, Inc. All rights reserved.
+              {t('copyright', { ns: 'login', year: new Date().getFullYear() })}
             </div>
           )}
         </div>

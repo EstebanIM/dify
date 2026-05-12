@@ -26,6 +26,7 @@
   "confirmPassword": "पासवर्ड की पुष्टि करें",
   "confirmPasswordPlaceholder": "अपना नया पासवर्ड पुष्टि करें",
   "continueWithCode": "कोड के साथ जारी रखें",
+  "copyright": "© {{year}} {{appName}}. सर्वाधिकार सुरक्षित।",
   "createAndSignIn": "बनाएं और साइन इन करें",
   "createSample": "इस जानकारी के आधार पर, हम आपके लिए नमूना एप्लिकेशन बनाएंगे",
   "dontHave": "नहीं है?",

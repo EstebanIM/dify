@@ -1,6 +1,7 @@
 'use client'
 import { cn } from '@langgenius/dify-ui/cn'
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query'
+import { useTranslation } from 'react-i18next'
 
 import Loading from '@/app/components/base/loading'
 import Header from '@/app/signin/_header'
@@ -10,6 +11,7 @@ import { systemFeaturesQueryOptions } from '@/service/system-features'
 import { isLegacyBase401, userProfileQueryOptions } from '@/service/use-common'
 
 export default function SignInLayout({ children }: any) {
+  const { t } = useTranslation()
   const { data: systemFeatures } = useSuspenseQuery(systemFeaturesQueryOptions())
   useDocumentTitle('')
   // Probe login state. 401 stays as `error` (not thrown) so this layout can render
@@ -46,11 +48,7 @@ export default function SignInLayout({ children }: any) {
           </div>
           {systemFeatures.branding.enabled === false && (
             <div className="px-8 py-6 system-xs-regular text-text-tertiary">
-              ©
-              {' '}
-              {new Date().getFullYear()}
-              {' '}
-              LangGenius, Inc. All rights reserved.
+              {t('copyright', { ns: 'login', year: new Date().getFullYear() })}
             </div>
           )}
         </div>

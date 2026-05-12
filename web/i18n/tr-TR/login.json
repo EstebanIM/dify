@@ -26,6 +26,7 @@
   "confirmPassword": "Şifreyi Onayla",
   "confirmPasswordPlaceholder": "Yeni şifrenizi onaylayın",
   "continueWithCode": "Kodla Devam Et",
+  "copyright": "© {{year}} {{appName}}. Tüm hakları saklıdır.",
   "createAndSignIn": "Oluştur ve giriş yap",
   "createSample": "Bu bilgilere dayanarak, sizin için örnek bir uygulama oluşturacağız",
   "dontHave": "Sahip değil misiniz?",

@@ -2,11 +2,13 @@
 import { cn } from '@langgenius/dify-ui/cn'
 import { useSuspenseQuery } from '@tanstack/react-query'
 import * as React from 'react'
+import { useTranslation } from 'react-i18next'
 import { systemFeaturesQueryOptions } from '@/service/system-features'
 import Header from '../signin/_header'
 import ActivateForm from './activateForm'
 
 const Activate = () => {
+  const { t } = useTranslation()
   const { data: systemFeatures } = useSuspenseQuery(systemFeaturesQueryOptions())
   return (
     <div className={cn('flex min-h-screen w-full justify-center bg-background-default-burn p-6')}>
@@ -15,11 +17,7 @@ const Activate = () => {
         <ActivateForm />
         {!systemFeatures.branding.enabled && (
           <div className="px-8 py-6 text-sm font-normal text-text-tertiary">
-            ©
-            {' '}
-            {new Date().getFullYear()}
-            {' '}
-            LangGenius, Inc. All rights reserved.
+            {t('copyright', { ns: 'login', year: new Date().getFullYear() })}
           </div>
         )}
       </div>
