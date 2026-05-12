@@ -20,7 +20,7 @@ def installed_app_required[**P, R](view: Callable[Concatenate[InstalledApp, P], 
     def decorator(view: Callable[Concatenate[InstalledApp, P], R]):
         @wraps(view)
         def decorated(installed_app_id: str, *args: P.args, **kwargs: P.kwargs):
-            _, current_tenant_id = current_account_with_tenant()
+            current_user, current_tenant_id = current_account_with_tenant()
             installed_app = db.session.scalar(
                 select(InstalledApp)
                 .where(InstalledApp.id == str(installed_app_id), InstalledApp.tenant_id == current_tenant_id)
@@ -35,6 +35,14 @@ def installed_app_required[**P, R](view: Callable[Concatenate[InstalledApp, P], 
                 db.session.commit()
 
                 raise NotFound("Installed app not found")
+
+            # Guest users can only reach installed apps that have been explicitly
+            # assigned to them. Other roles are allowed by tenant membership alone.
+            if getattr(current_user, "is_guest", False):
+                from services.guest_assignment_service import GuestAssignmentService
+
+                if not GuestAssignmentService.account_can_access_app(current_user.id, installed_app.app_id):
+                    raise NotFound("Installed app not found")
 
             return view(installed_app, *args, **kwargs)
 

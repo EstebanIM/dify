@@ -117,6 +117,9 @@ from .explore import (
     saved_message,
     trial,
 )
+
+# Import guest controllers
+from .guest import apps as guest_apps  # noqa: F401
 from .socketio import workflow as socketio_workflow  # pyright: ignore[reportUnusedImport]
 
 # Import tag controllers
@@ -127,6 +130,7 @@ from .workspace import (
     account,
     agent_providers,
     endpoint,
+    guest_assignments,
     load_balancing_config,
     members,
     model_providers,
@@ -174,6 +178,8 @@ __all__ = [
     "feature",
     "forgot_password",
     "generator",
+    "guest_apps",
+    "guest_assignments",
     "hit_testing",
     "human_input_form",
     "init_validate",

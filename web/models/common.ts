@@ -53,7 +53,7 @@ export type LangGeniusVersionResponse = {
 export type Member = Pick<UserProfileResponse, 'id' | 'name' | 'email' | 'last_login_at' | 'last_active_at' | 'created_at' | 'avatar_url'> & {
   avatar: string
   status: 'pending' | 'active' | 'banned' | 'closed'
-  role: 'owner' | 'admin' | 'editor' | 'normal' | 'dataset_operator'
+  role: 'owner' | 'admin' | 'editor' | 'normal' | 'dataset_operator' | 'guest'
 }
 
 enum ProviderName {
@@ -103,7 +103,7 @@ export type IWorkspace = {
 }
 
 export type ICurrentWorkspace = Omit<IWorkspace, 'current'> & {
-  role: 'owner' | 'admin' | 'editor' | 'dataset_operator' | 'normal'
+  role: 'owner' | 'admin' | 'editor' | 'dataset_operator' | 'normal' | 'guest'
   providers: Provider[]
   trial_credits: number
   trial_credits_used: number

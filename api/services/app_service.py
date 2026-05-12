@@ -373,6 +373,12 @@ class AppService:
         """
         app_was_deleted.send(app)
 
+        # Clean up guest assignments for this app BEFORE removing the row so we
+        # never leave orphan entries pointing to a deleted app.
+        from services.guest_assignment_service import GuestAssignmentService
+
+        GuestAssignmentService.cascade_delete_for_app(app.id)
+
         db.session.delete(app)
         db.session.commit()
 

@@ -18,6 +18,7 @@ type IOperationProps = {
   member: Member
   operatorRole: string
   onOperate: () => void
+  onEditGuestApps?: () => void
 }
 const roleI18nKeyMap = {
   admin: { label: 'members.admin', tip: 'members.adminTip' },
@@ -26,17 +27,19 @@ const roleI18nKeyMap = {
   dataset_operator: { label: 'members.datasetOperator', tip: 'members.datasetOperatorTip' },
 } as const
 type OperationRoleKey = keyof typeof roleI18nKeyMap
-const Operation = ({ member, operatorRole, onOperate }: IOperationProps) => {
+const Operation = ({ member, operatorRole, onOperate, onEditGuestApps }: IOperationProps) => {
   const [open, setOpen] = useState(false)
   const { t } = useTranslation()
   const { datasetOperatorEnabled } = useProviderContext()
-  const RoleMap = {
+  const RoleMap: Record<string, string> = {
     owner: t('members.owner', { ns: 'common' }),
     admin: t('members.admin', { ns: 'common' }),
     editor: t('members.editor', { ns: 'common' }),
     normal: t('members.normal', { ns: 'common' }),
     dataset_operator: t('members.datasetOperator', { ns: 'common' }),
+    guest: t('members.guest', { ns: 'common' }),
   }
+  const isGuest = member.role === 'guest'
   const roleList = useMemo((): OperationRoleKey[] => {
     if (operatorRole === 'owner') {
       return [
@@ -91,36 +94,70 @@ const Operation = ({ member, operatorRole, onOperate }: IOperationProps) => {
         sideOffset={4}
         popupClassName="inline-flex flex-col rounded-xl p-0"
       >
-        <div className="p-1">
-          {roleList.map(role => (
-            <DropdownMenuItem
-              key={role}
-              className="h-auto items-start gap-2 rounded-lg px-3 py-2"
-              onClick={() => handleUpdateMemberRole(role)}
-            >
-              {role === member.role
-                ? <span aria-hidden className="mt-[2px] i-ri-check-line h-4 w-4 shrink-0 text-text-accent" />
-                : <span aria-hidden className="mt-[2px] h-4 w-4 shrink-0" />}
-              <div>
-                <div className="system-sm-semibold whitespace-nowrap text-text-secondary">{t(roleI18nKeyMap[role].label, { ns: 'common' })}</div>
-                <div className="system-xs-regular whitespace-nowrap text-text-tertiary">{t(roleI18nKeyMap[role].tip, { ns: 'common' })}</div>
+        {isGuest
+          ? (
+              <div className="p-1">
+                {onEditGuestApps && (
+                  <DropdownMenuItem
+                    className="h-auto items-start gap-2 rounded-lg px-3 py-2"
+                    onClick={() => {
+                      setOpen(false)
+                      onEditGuestApps()
+                    }}
+                  >
+                    <span aria-hidden className="mt-[2px] i-ri-apps-line h-4 w-4 shrink-0 text-text-tertiary" />
+                    <div>
+                      <div className="system-sm-semibold whitespace-nowrap text-text-secondary">{t('guests.manageApps', { ns: 'common' })}</div>
+                      <div className="system-xs-regular whitespace-nowrap text-text-tertiary">{t('guests.editAppsTip', { ns: 'common' })}</div>
+                    </div>
+                  </DropdownMenuItem>
+                )}
+                <DropdownMenuItem
+                  className="h-auto items-start gap-2 rounded-lg px-3 py-2"
+                  onClick={handleDeleteMemberOrCancelInvitation}
+                >
+                  <span aria-hidden className="mt-[2px] i-ri-delete-bin-line h-4 w-4 shrink-0 text-text-tertiary" />
+                  <div>
+                    <div className="system-sm-semibold whitespace-nowrap text-text-secondary">{t('guests.removeGuest', { ns: 'common' })}</div>
+                    <div className="system-xs-regular whitespace-nowrap text-text-tertiary">{t('guests.removeGuestTip', { ns: 'common' })}</div>
+                  </div>
+                </DropdownMenuItem>
               </div>
-            </DropdownMenuItem>
-          ))}
-        </div>
-        <DropdownMenuSeparator className="my-0" />
-        <div className="p-1">
-          <DropdownMenuItem
-            className="h-auto items-start gap-2 rounded-lg px-3 py-2"
-            onClick={handleDeleteMemberOrCancelInvitation}
-          >
-            <span aria-hidden className="mt-[2px] h-4 w-4 shrink-0" />
-            <div>
-              <div className="system-sm-semibold whitespace-nowrap text-text-secondary">{t('members.removeFromTeam', { ns: 'common' })}</div>
-              <div className="system-xs-regular whitespace-nowrap text-text-tertiary">{t('members.removeFromTeamTip', { ns: 'common' })}</div>
-            </div>
-          </DropdownMenuItem>
-        </div>
+            )
+          : (
+              <>
+                <div className="p-1">
+                  {roleList.map(role => (
+                    <DropdownMenuItem
+                      key={role}
+                      className="h-auto items-start gap-2 rounded-lg px-3 py-2"
+                      onClick={() => handleUpdateMemberRole(role)}
+                    >
+                      {role === member.role
+                        ? <span aria-hidden className="mt-[2px] i-ri-check-line h-4 w-4 shrink-0 text-text-accent" />
+                        : <span aria-hidden className="mt-[2px] h-4 w-4 shrink-0" />}
+                      <div>
+                        <div className="system-sm-semibold whitespace-nowrap text-text-secondary">{t(roleI18nKeyMap[role].label, { ns: 'common' })}</div>
+                        <div className="system-xs-regular whitespace-nowrap text-text-tertiary">{t(roleI18nKeyMap[role].tip, { ns: 'common' })}</div>
+                      </div>
+                    </DropdownMenuItem>
+                  ))}
+                </div>
+                <DropdownMenuSeparator className="my-0" />
+                <div className="p-1">
+                  <DropdownMenuItem
+                    className="h-auto items-start gap-2 rounded-lg px-3 py-2"
+                    onClick={handleDeleteMemberOrCancelInvitation}
+                  >
+                    <span aria-hidden className="mt-[2px] h-4 w-4 shrink-0" />
+                    <div>
+                      <div className="system-sm-semibold whitespace-nowrap text-text-secondary">{t('members.removeFromTeam', { ns: 'common' })}</div>
+                      <div className="system-xs-regular whitespace-nowrap text-text-tertiary">{t('members.removeFromTeamTip', { ns: 'common' })}</div>
+                    </div>
+                  </DropdownMenuItem>
+                </div>
+              </>
+            )}
       </DropdownMenuContent>
     </DropdownMenu>
   )

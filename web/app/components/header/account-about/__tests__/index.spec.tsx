@@ -69,12 +69,12 @@ describe('AccountAbout', () => {
   })
 
   describe('Community Edition', () => {
-    it('should render correctly in Community Edition', () => {
+    it('should not render Open Source License link in Community Edition', () => {
       mockIsCEEdition = true
 
       renderWithSystemFeatures(<AccountAbout langGeniusVersionInfo={mockVersionInfo} onCancel={mockOnCancel} />)
 
-      expect(screen.getByText(/Open Source License/)).toBeInTheDocument()
+      expect(screen.queryByText(/Open Source License/)).not.toBeInTheDocument()
     })
 
     it('should hide update button in Community Edition when behind version', () => {

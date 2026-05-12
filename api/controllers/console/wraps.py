@@ -337,6 +337,29 @@ def is_admin_or_owner_required[**P, R](f: Callable[P, R]) -> Callable[P, R]:
     return decorated_function
 
 
+def deny_guest[**P, R](f: Callable[P, R]) -> Callable[P, R]:
+    """Reject the request with 403 if the current user has the GUEST role.
+
+    Used on endpoints that manage the platform (Studio, Knowledge, Tools,
+    Explore, Settings, etc.) so that guests cannot reach them even by
+    direct URL or scripting.
+    """
+
+    @wraps(f)
+    def decorated_function(*args: P.args, **kwargs: P.kwargs):
+        from werkzeug.exceptions import Forbidden
+
+        from libs.login import current_user
+        from models import Account
+
+        user = current_user._get_current_object()  # type: ignore
+        if isinstance(user, Account) and user.is_guest:
+            raise Forbidden("Guest accounts cannot access this resource.")
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
 def annotation_import_rate_limit[**P, R](view: Callable[P, R]) -> Callable[P, R]:
     """
     Rate limiting decorator for annotation import operations.

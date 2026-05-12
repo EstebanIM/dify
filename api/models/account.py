@@ -22,6 +22,7 @@ class TenantAccountRole(enum.StrEnum):
     EDITOR = "editor"
     NORMAL = "normal"
     DATASET_OPERATOR = "dataset_operator"
+    GUEST = "guest"
 
     @staticmethod
     def is_valid_role(role: str) -> bool:
@@ -33,6 +34,7 @@ class TenantAccountRole(enum.StrEnum):
             TenantAccountRole.EDITOR,
             TenantAccountRole.NORMAL,
             TenantAccountRole.DATASET_OPERATOR,
+            TenantAccountRole.GUEST,
         }
 
     @staticmethod
@@ -56,6 +58,7 @@ class TenantAccountRole(enum.StrEnum):
             TenantAccountRole.EDITOR,
             TenantAccountRole.NORMAL,
             TenantAccountRole.DATASET_OPERATOR,
+            TenantAccountRole.GUEST,
         }
 
     @staticmethod
@@ -74,6 +77,12 @@ class TenantAccountRole(enum.StrEnum):
             TenantAccountRole.EDITOR,
             TenantAccountRole.DATASET_OPERATOR,
         }
+
+    @staticmethod
+    def is_guest_role(role: Optional["TenantAccountRole"]) -> bool:
+        if not role:
+            return False
+        return role == TenantAccountRole.GUEST
 
 
 class AccountStatus(enum.StrEnum):
@@ -225,6 +234,11 @@ class Account(UserMixin, TypeBase):
     @property
     def is_dataset_operator(self):
         return self.role == TenantAccountRole.DATASET_OPERATOR
+
+    @property
+    def is_guest(self):
+        """True when the account's current tenant role is GUEST (restricted user with assigned apps only)."""
+        return self.role == TenantAccountRole.GUEST
 
 
 class TenantStatus(enum.StrEnum):

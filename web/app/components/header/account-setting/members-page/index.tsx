@@ -3,7 +3,7 @@ import type { InvitationResult } from '@/models/common'
 import { Avatar } from '@langgenius/dify-ui/avatar'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@langgenius/dify-ui/tooltip'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NUM_INFINITE } from '@/app/components/billing/config'
 import { Plan } from '@/app/components/billing/type'
@@ -15,8 +15,12 @@ import { useFormatTimeFromNow } from '@/hooks/use-format-time-from-now'
 import { LanguagesSupported } from '@/i18n-config/language'
 import { systemFeaturesQueryOptions } from '@/service/system-features'
 import { useMembers } from '@/service/use-common'
+import { useWorkspaceGuests } from '@/service/use-guest-admin'
+import { Button } from '@langgenius/dify-ui/button'
+import EditGuestAppsModal from './edit-guest-apps-modal'
 import EditWorkspaceModal from './edit-workspace-modal'
 import InviteButton from './invite-button'
+import InviteGuestModal from './invite-guest-modal'
 import InviteModal from './invite-modal'
 import InvitedModal from './invited-modal'
 import Operation from './operation'
@@ -31,6 +35,7 @@ const MembersPage = () => {
     editor: t('members.editor', { ns: 'common' }),
     dataset_operator: t('members.datasetOperator', { ns: 'common' }),
     normal: t('members.normal', { ns: 'common' }),
+    guest: t('members.guest', { ns: 'common' }),
   }
   const locale = useLocale()
 
@@ -39,9 +44,22 @@ const MembersPage = () => {
   const { data: systemFeatures } = useSuspenseQuery(systemFeaturesQueryOptions())
   const { formatTimeFromNow } = useFormatTimeFromNow()
   const [inviteModalVisible, setInviteModalVisible] = useState(false)
+  const [inviteGuestModalVisible, setInviteGuestModalVisible] = useState(false)
   const [invitationResults, setInvitationResults] = useState<InvitationResult[]>([])
   const [invitedModalVisible, setInvitedModalVisible] = useState(false)
+  const [editingGuest, setEditingGuest] = useState<{ id: string; email: string } | null>(null)
   const accounts = data?.accounts || []
+  // Fetch guest summaries only when there is at least one guest in the list,
+  // so we can show the per-row "N apps assigned" counter without hitting the
+  // endpoint on workspaces that don't use guests.
+  const hasAnyGuest = accounts.some(a => a.role === 'guest')
+  const { data: guestsResp } = useWorkspaceGuests(isCurrentWorkspaceManager && hasAnyGuest)
+  const guestAppCountById = useMemo(() => {
+    const map: Record<string, number> = {}
+    for (const g of guestsResp?.guests ?? [])
+      map[g.id] = g.assigned_app_count ?? 0
+    return map
+  }, [guestsResp])
   const { plan, enableBilling, isAllowTransferWorkspace } = useProviderContext()
   const isNotUnlimitedMemberPlan = enableBilling && plan.type !== Plan.team && plan.type !== Plan.enterprise
   const isMemberFull = enableBilling && isNotUnlimitedMemberPlan && accounts.length >= plan.total.teamMembers
@@ -111,7 +129,12 @@ const MembersPage = () => {
           {isMemberFull && (
             <UpgradeBtn className="mr-2" loc="member-invite" />
           )}
-          <div className="shrink-0">
+          <div className="flex shrink-0 items-center gap-2">
+            {isCurrentWorkspaceManager && (
+              <Button onClick={() => setInviteGuestModalVisible(true)}>
+                {t('guests.inviteGuest', { ns: 'common' })}
+              </Button>
+            )}
             {isCurrentWorkspaceManager && <InviteButton disabled={isMemberFull} onClick={() => setInviteModalVisible(true)} />}
           </div>
         </div>
@@ -133,7 +156,14 @@ const MembersPage = () => {
                         {account.status === 'pending' && <span className="ml-1 system-xs-medium text-text-warning">{t('members.pending', { ns: 'common' })}</span>}
                         {userProfile.email === account.email && <span className="system-xs-regular text-text-tertiary">{t('members.you', { ns: 'common' })}</span>}
                       </div>
-                      <div className="system-xs-regular text-text-tertiary">{account.email}</div>
+                      <div className="system-xs-regular text-text-tertiary">
+                        {account.email}
+                        {account.role === 'guest' && guestAppCountById[account.id] !== undefined && (
+                          <span className="ml-2">
+                            · {t('guests.assignedAppCount', { ns: 'common', count: guestAppCountById[account.id] })}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
                   <div className="flex w-[104px] shrink-0 items-center py-2 system-sm-regular text-text-secondary">{formatTimeFromNow(Number((account.last_active_at || account.created_at)) * 1000)}</div>
@@ -145,7 +175,14 @@ const MembersPage = () => {
                       <div className="px-3 system-sm-regular text-text-secondary">{RoleMap[account.role] || RoleMap.normal}</div>
                     )}
                     {isCurrentWorkspaceOwner && account.role !== 'owner' && (
-                      <Operation member={account} operatorRole={currentWorkspace.role} onOperate={refetch} />
+                      <Operation
+                        member={account}
+                        operatorRole={currentWorkspace.role}
+                        onOperate={refetch}
+                        onEditGuestApps={account.role === 'guest'
+                          ? () => setEditingGuest({ id: account.id, email: account.email })
+                          : undefined}
+                      />
                     )}
                     {!isCurrentWorkspaceOwner && (
                       <div className="px-3 system-sm-regular text-text-secondary">{RoleMap[account.role] || RoleMap.normal}</div>
@@ -179,6 +216,18 @@ const MembersPage = () => {
         )
       }
       {
+        inviteGuestModalVisible && (
+          <InviteGuestModal
+            onCancel={() => setInviteGuestModalVisible(false)}
+            onSuccess={(url, email) => {
+              setInvitationResults([{ status: 'success', email, url, message: '' } as InvitationResult])
+              setInvitedModalVisible(true)
+              refetch()
+            }}
+          />
+        )
+      }
+      {
         editWorkspaceModalVisible && (
           <EditWorkspaceModal
             onCancel={() => setEditWorkspaceModalVisible(false)}
@@ -189,6 +238,14 @@ const MembersPage = () => {
         <TransferOwnershipModal
           show={showTransferOwnershipModal}
           onClose={() => setShowTransferOwnershipModal(false)}
+        />
+      )}
+      {editingGuest && (
+        <EditGuestAppsModal
+          accountId={editingGuest.id}
+          guestEmail={editingGuest.email}
+          onCancel={() => setEditingGuest(null)}
+          onSuccess={refetch}
         />
       )}
     </>

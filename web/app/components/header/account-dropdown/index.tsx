@@ -13,7 +13,6 @@ import ThemeSwitcher from '@/app/components/base/theme-switcher'
 import { ACCOUNT_SETTING_TAB } from '@/app/components/header/account-setting/constants'
 import { IS_CLOUD_EDITION } from '@/config'
 import { useAppContext } from '@/context/app-context'
-import { useDocLink } from '@/context/i18n'
 import { useModalContext } from '@/context/modal-context'
 import { useProviderContext } from '@/context/provider-context'
 import { env } from '@/env'
@@ -22,11 +21,9 @@ import { useRouter } from '@/next/navigation'
 import { systemFeaturesQueryOptions } from '@/service/system-features'
 import { useLogout } from '@/service/use-common'
 import AccountAbout from '../account-about'
-import GithubStar from '../github-star'
 import Indicator from '../indicator'
 import Compliance from './compliance'
 import { ExternalLinkIndicator, MenuItemContent } from './menu-item-content'
-import Support from './support'
 
 type AccountMenuRouteItemProps = {
   href: string
@@ -114,8 +111,7 @@ export default function AppSelector() {
   const { data: systemFeatures } = useSuspenseQuery(systemFeaturesQueryOptions())
 
   const { t } = useTranslation()
-  const docLink = useDocLink()
-  const { userProfile, langGeniusVersionInfo, isCurrentWorkspaceOwner } = useAppContext()
+  const { userProfile, langGeniusVersionInfo, isCurrentWorkspaceOwner, isCurrentWorkspaceGuest } = useAppContext()
   const { isEducationAccount } = useProviderContext()
   const { setShowAccountSettingModal } = useModalContext()
 
@@ -169,46 +165,28 @@ export default function AppSelector() {
               label={t('account.account', { ns: 'common' })}
               trailing={<ExternalLinkIndicator />}
             />
-            <AccountMenuActionItem
-              iconClassName="i-ri-settings-3-line"
-              label={t('userProfile.settings', { ns: 'common' })}
-              onClick={() => setShowAccountSettingModal({ payload: ACCOUNT_SETTING_TAB.MEMBERS })}
-            />
+            {!isCurrentWorkspaceGuest && (
+              <AccountMenuActionItem
+                iconClassName="i-ri-settings-3-line"
+                label={t('userProfile.settings', { ns: 'common' })}
+                onClick={() => setShowAccountSettingModal({ payload: ACCOUNT_SETTING_TAB.MEMBERS })}
+              />
+            )}
           </DropdownMenuGroup>
           <DropdownMenuSeparator className="my-0! bg-divider-subtle" />
-          {!systemFeatures.branding.enabled && (
+          {!systemFeatures.branding.enabled && !isCurrentWorkspaceGuest && (
             <>
-              <AccountMenuSection>
-                <AccountMenuExternalItem
-                  href={docLink('/use-dify/getting-started/introduction')}
-                  iconClassName="i-ri-book-open-line"
-                  label={t('userProfile.helpCenter', { ns: 'common' })}
-                  trailing={<ExternalLinkIndicator />}
-                />
-                <Support closeAccountDropdown={() => setIsAccountMenuOpen(false)} />
-                {IS_CLOUD_EDITION && isCurrentWorkspaceOwner && <Compliance />}
-              </AccountMenuSection>
-              <DropdownMenuSeparator className="my-0! bg-divider-subtle" />
-              <AccountMenuSection>
-                <AccountMenuExternalItem
-                  href="https://roadmap.dify.ai"
-                  iconClassName="i-ri-map-2-line"
-                  label={t('userProfile.roadmap', { ns: 'common' })}
-                  trailing={<ExternalLinkIndicator />}
-                />
-                <AccountMenuExternalItem
-                  href="https://github.com/langgenius/dify"
-                  iconClassName="i-ri-github-line"
-                  label={t('userProfile.github', { ns: 'common' })}
-                  trailing={(
-                    <div className="flex items-center gap-0.5 rounded-[5px] border border-divider-deep bg-components-badge-bg-dimm px-[5px] py-[3px]">
-                      <span aria-hidden className="i-ri-star-line size-3 shrink-0 text-text-tertiary" />
-                      <GithubStar className="system-2xs-medium-uppercase text-text-tertiary" />
-                    </div>
-                  )}
-                />
-                {
-                  env.NEXT_PUBLIC_SITE_ABOUT !== 'hide' && (
+              {IS_CLOUD_EDITION && isCurrentWorkspaceOwner && (
+                <>
+                  <AccountMenuSection>
+                    <Compliance />
+                  </AccountMenuSection>
+                  <DropdownMenuSeparator className="my-0! bg-divider-subtle" />
+                </>
+              )}
+              {env.NEXT_PUBLIC_SITE_ABOUT !== 'hide' && (
+                <>
+                  <AccountMenuSection>
                     <AccountMenuActionItem
                       iconClassName="i-ri-information-2-line"
                       label={t('userProfile.about', { ns: 'common' })}
@@ -223,10 +201,10 @@ export default function AppSelector() {
                         </div>
                       )}
                     />
-                  )
-                }
-              </AccountMenuSection>
-              <DropdownMenuSeparator className="my-0! bg-divider-subtle" />
+                  </AccountMenuSection>
+                  <DropdownMenuSeparator className="my-0! bg-divider-subtle" />
+                </>
+              )}
             </>
           )}
           <AccountMenuSection>

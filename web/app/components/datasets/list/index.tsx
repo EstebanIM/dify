@@ -1,7 +1,6 @@
 'use client'
 
 import { Button } from '@langgenius/dify-ui/button'
-import { useSuspenseQuery } from '@tanstack/react-query'
 import { useBoolean, useDebounceFn } from 'ahooks'
 
 // Libraries
@@ -15,16 +14,13 @@ import { TagFilter } from '@/features/tag-management/components/tag-filter'
 import { TagManagementModal } from '@/features/tag-management/components/tag-management-modal'
 import useDocumentTitle from '@/hooks/use-document-title'
 import { useDatasetApiBaseUrl, useInvalidDatasetList } from '@/service/knowledge/use-dataset'
-import { systemFeaturesQueryOptions } from '@/service/system-features'
 // Components
 import ExternalAPIPanel from '../external-api/external-api-panel'
 import ServiceApi from '../extra-info/service-api'
-import DatasetFooter from './dataset-footer'
 import Datasets from './datasets'
 
 const List = () => {
   const { t } = useTranslation()
-  const { data: systemFeatures } = useSuspenseQuery(systemFeaturesQueryOptions())
   const { isCurrentWorkspaceOwner } = useAppContext()
   const [showTagManagementModal, setShowTagManagementModal] = useState(false)
   const { showExternalApiPanel, setShowExternalApiPanel } = useExternalApiPanel()
@@ -93,7 +89,6 @@ const List = () => {
         </div>
       </div>
       <Datasets tags={tagIDs} keywords={searchKeywords} includeAll={includeAll} onOpenTagManagement={() => setShowTagManagementModal(true)} />
-      {!systemFeatures.branding.enabled && <DatasetFooter />}
       <TagManagementModal
         type="knowledge"
         show={showTagManagementModal}

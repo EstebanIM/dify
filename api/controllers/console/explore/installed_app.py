@@ -145,6 +145,13 @@ class InstalledAppsListApi(Resource):
                 select(InstalledApp).where(InstalledApp.tenant_id == current_tenant_id)
             ).all()
 
+        # Guests only see apps explicitly assigned to them.
+        if getattr(current_user, "is_guest", False):
+            from services.guest_assignment_service import GuestAssignmentService
+
+            allowed_app_ids = GuestAssignmentService.list_app_ids_for_account(current_user.id, current_tenant_id)
+            installed_apps = [ia for ia in installed_apps if ia.app_id in allowed_app_ids]
+
         if current_user.current_tenant is None:
             raise ValueError("current_user.current_tenant must not be None")
         current_user.role = TenantService.get_user_role(current_user, current_user.current_tenant)

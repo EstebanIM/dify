@@ -108,6 +108,13 @@ class MemberInviteEmailApi(Resource):
         interface_language = args.language
         if not TenantAccountRole.is_non_owner_role(invitee_role):
             return {"code": "invalid-role", "message": "Invalid role"}, 400
+        # Guests must be invited via the dedicated /invite-guest endpoint that
+        # also collects the initial set of app assignments.
+        if TenantAccountRole.is_guest_role(invitee_role):
+            return {
+                "code": "invalid-role",
+                "message": "Use /workspaces/current/members/invite-guest to invite guests.",
+            }, 400
         current_user, _ = current_account_with_tenant()
         inviter = current_user
         if not inviter.current_tenant:

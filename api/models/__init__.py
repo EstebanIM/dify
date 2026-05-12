@@ -39,6 +39,7 @@ from .enums import (
     WorkflowTriggerStatus,
 )
 from .execution_extra_content import ExecutionExtraContent, HumanInputContent
+from .guest_assignment import AccountAppAssignment
 from .human_input import HumanInputForm
 from .model import (
     AccountTrialAppRecord,
@@ -122,6 +123,7 @@ __all__ = [
     "APIBasedExtension",
     "APIBasedExtensionPoint",
     "Account",
+    "AccountAppAssignment",
     "AccountIntegrate",
     "AccountStatus",
     "AccountTrialAppRecord",

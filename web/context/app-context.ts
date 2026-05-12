@@ -12,6 +12,7 @@ export type AppContextValue = {
   isCurrentWorkspaceOwner: boolean
   isCurrentWorkspaceEditor: boolean
   isCurrentWorkspaceDatasetOperator: boolean
+  isCurrentWorkspaceGuest: boolean
   mutateCurrentWorkspace: VoidFunction
   langGeniusVersionInfo: LangGeniusVersionResponse
   useSelector: typeof useSelector
@@ -58,6 +59,7 @@ export const AppContext = createContext<AppContextValue>({
   isCurrentWorkspaceOwner: false,
   isCurrentWorkspaceEditor: false,
   isCurrentWorkspaceDatasetOperator: false,
+  isCurrentWorkspaceGuest: false,
   mutateUserProfile: noop,
   mutateCurrentWorkspace: noop,
   langGeniusVersionInfo: initialLangGeniusVersionInfo,

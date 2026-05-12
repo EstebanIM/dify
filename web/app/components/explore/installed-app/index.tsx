@@ -3,10 +3,14 @@ import type { AccessMode } from '@/models/access-control'
 import type { AppData } from '@/models/share'
 import * as React from 'react'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { RiArrowLeftLine } from '@remixicon/react'
 import ChatWithHistory from '@/app/components/base/chat/chat-with-history'
 import Loading from '@/app/components/base/loading'
 import TextGenerationApp from '@/app/components/share/text-generation'
+import { useAppContext } from '@/context/app-context'
 import { useWebAppStore } from '@/context/web-app-context'
+import Link from '@/next/link'
 import { useGetUserCanAccessApp } from '@/service/access-control'
 import { useGetInstalledAppAccessModeByAppId, useGetInstalledAppMeta, useGetInstalledAppParams, useGetInstalledApps } from '@/service/use-explore'
 import { AppModeEnum } from '@/types/app'
@@ -17,6 +21,8 @@ const InstalledApp = ({
 }: {
   id: string
 }) => {
+  const { t } = useTranslation()
+  const { isCurrentWorkspaceGuest } = useAppContext()
   const { data, isPending: isPendingInstalledApps, isFetching: isFetchingInstalledApps } = useGetInstalledApps()
   const installedApp = data?.installed_apps?.find(item => item.id === id)
   const updateAppInfo = useWebAppStore(s => s.updateAppInfo)
@@ -116,16 +122,29 @@ const InstalledApp = ({
     )
   }
   return (
-    <div className="h-full bg-background-default py-2 pr-2 pl-0 sm:p-2">
-      {installedApp?.app.mode !== AppModeEnum.COMPLETION && installedApp?.app.mode !== AppModeEnum.WORKFLOW && (
-        <ChatWithHistory installedAppInfo={installedApp} className="overflow-hidden rounded-2xl shadow-md" />
+    <div className="flex h-full flex-col bg-background-default py-2 pr-2 pl-0 sm:p-2">
+      {isCurrentWorkspaceGuest && (
+        <div className="mb-2 flex shrink-0 items-center">
+          <Link
+            href="/home"
+            className="inline-flex items-center gap-1 rounded-md px-2 py-1 system-sm-medium text-text-secondary hover:bg-background-default-dodge"
+          >
+            <RiArrowLeftLine className="h-4 w-4" />
+            {t('home.backToHome', { ns: 'common' })}
+          </Link>
+        </div>
       )}
-      {installedApp?.app.mode === AppModeEnum.COMPLETION && (
-        <TextGenerationApp isInstalledApp installedAppInfo={installedApp} />
-      )}
-      {installedApp?.app.mode === AppModeEnum.WORKFLOW && (
-        <TextGenerationApp isWorkflow isInstalledApp installedAppInfo={installedApp} />
-      )}
+      <div className="min-h-0 flex-1">
+        {installedApp?.app.mode !== AppModeEnum.COMPLETION && installedApp?.app.mode !== AppModeEnum.WORKFLOW && (
+          <ChatWithHistory installedAppInfo={installedApp} className="overflow-hidden rounded-2xl shadow-md" />
+        )}
+        {installedApp?.app.mode === AppModeEnum.COMPLETION && (
+          <TextGenerationApp isInstalledApp installedAppInfo={installedApp} />
+        )}
+        {installedApp?.app.mode === AppModeEnum.WORKFLOW && (
+          <TextGenerationApp isWorkflow isInstalledApp installedAppInfo={installedApp} />
+        )}
+      </div>
     </div>
   )
 }
