@@ -27,6 +27,7 @@ Dify es una plataforma de desarrollo de aplicaciones LLM compuesta por un **back
 | [03_core_components.md](./frontend/03_core_components.md)                         | Design system (`base/`), layouts de cabecera y catálogo de componentes por feature (apps, workflow editor, datasets, plugins, explore)                  | Referencia para reutilizar componentes existentes antes de crear nuevos                  |
 | [04_api_consumption.md](./frontend/04_api_consumption.md)                         | Capa de fetch, selección de base URL, interceptores, streaming SSE, subida de archivos, clientes ORPC tipados, hooks TanStack Query y manejo de errores | Referencia para conectar el frontend a cualquier endpoint del backend                    |
 | [05_frontend_modification_guide.md](./frontend/05_frontend_modification_guide.md) | Guías paso a paso: modificar componentes del dashboard, añadir rutas, conectar nuevos endpoints y checklist de cambios                                  | Manual de cambios: seguir estos pasos para extender el frontend de forma consistente     |
+| [06_styling_and_branding.md](./frontend/06_styling_and_branding.md)               | Sistema de estilos (Tailwind v4 CSS-first), capas de design tokens, temas light/dark, tipografías, iconos, logos y personalizaciones de branding del fork | Referencia única para cualquier cambio estético: colores, fuentes, iconos, logos o nombre de la plataforma |
 
 ---
 
@@ -45,7 +46,12 @@ Dify es una plataforma de desarrollo de aplicaciones LLM compuesta por un **back
 | Añadir una nueva página o ruta en la consola                | [frontend/05](./frontend/05_frontend_modification_guide.md) §B → [frontend/02](./frontend/02_state_and_routing.md)                                    |
 | Conectar un nuevo endpoint del backend a la UI              | [frontend/05](./frontend/05_frontend_modification_guide.md) §C → [frontend/04](./frontend/04_api_consumption.md)                                      |
 | Añadir un componente al design system                       | [frontend/03](./frontend/03_core_components.md) §Design System                                                                                        |
-| Cambiar estilos globales o el sistema de temas              | [frontend/01](./frontend/01_frontend_overview.md) §Sistema de estilos                                                                                 |
+| Cambiar estilos globales o el sistema de temas              | [frontend/06](./frontend/06_styling_and_branding.md)                                                                                                  |
+| Cambiar la paleta de colores / colores semánticos           | [frontend/06](./frontend/06_styling_and_branding.md) §2 — capas A/B/C                                                                                 |
+| Cambiar la tipografía o añadir una fuente                   | [frontend/06](./frontend/06_styling_and_branding.md) §3                                                                                               |
+| Añadir, regenerar o reemplazar iconos                       | [frontend/06](./frontend/06_styling_and_branding.md) §4                                                                                               |
+| Cambiar logos por defecto o el componente que los renderiza | [frontend/06](./frontend/06_styling_and_branding.md) §5                                                                                               |
+| Configurar nombre de plataforma, logo custom o "Powered by" | [frontend/06](./frontend/06_styling_and_branding.md) §6                                                                                               |
 | Gestionar estado global o por feature                       | [frontend/02](./frontend/02_state_and_routing.md) §Estado global                                                                                      |
 | Añadir soporte i18n a un componente                         | [frontend/05](./frontend/05_frontend_modification_guide.md) §A.4                                                                                      |
 | Modificar la webapp pública embebible (shareLayout)         | [frontend/02](./frontend/02_state_and_routing.md) §shareLayout → [frontend/05](./frontend/05_frontend_modification_guide.md) §B.5                     |

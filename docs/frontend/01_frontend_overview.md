@@ -16,14 +16,14 @@ dify/
     ├── contract/          ← Contratos ORPC (consoleRouterContract, marketplaceRouterContract)
     ├── config/            ← Constantes de compilación derivadas de env vars
     ├── i18n/              ← Archivos de traducción por locale (en-US, zh-Hans, ja-JP…)
-    ├── themes/            ← CSS de temas (light/dark) + tokens Tailwind
+    ├── themes/            ← gradientes y máscaras propias del proyecto (manual-light/dark) + markdown.css
     ├── utils/             ← Helpers puros (client detection, gtag, setup status)
     ├── plugins/           ← Código de la feature de plugins
     ├── public/            ← Assets estáticos servidos directamente
     ├── next.config.ts     ← Configuración Next.js (TypeScript)
     ├── env.ts             ← Validación de env vars con @t3-oss/env-nextjs
     ├── proxy.ts           ← Middleware de Next.js (CSP, X-Frame-Options)
-    ├── tailwind.config.ts ← Config Tailwind
+    ├── app/styles/tailwind-core.css ← entrada Tailwind v4 CSS-first (no hay tailwind.config.*)
     └── package.json
 ```
 
@@ -110,38 +110,49 @@ dify/
 
 ## Sistema de estilos
 
-### Tailwind v4 + variables CSS semánticas
+> **Referencia detallada**: ver [06_styling_and_branding.md](./06_styling_and_branding.md) para paleta de colores, design tokens, tipografías, iconos, logos y personalizaciones de branding.
 
-`tailwind.config.ts` escanea `./app/**` y `./components/**`, y extiende Tailwind con:
+### Tailwind v4 CSS-first
 
-- **Colores**: Paletas gray/primary/blue/green/yellow/purple más decenas de colores semánticos mapeados desde CSS variables (e.g. `bg-components-badge-status-light-success-halo`, `text-divider-deep`). Esto se define en `themes/tailwind-theme-var-define.ts`.
-- **Breakpoints personalizados**: `mobile: 100px`, `tablet: 640px`, `pc: 769px`, `2k: 2560px`
-- **Sombras semánticas**: `xs` … `3xl` más indicadores de estado.
-- **Plugins**: `@tailwindcss/typography`, `@egoist/tailwindcss-icons` (colecciones `heroicons`, `ri`, `custom-public`).
-- **`corePlugins.preflight: false`**: Deshabilitado; usan su propio preflight en `app/styles/preflight.css`.
+El proyecto usa **Tailwind CSS v4** en modo *CSS-first*: **no existe `tailwind.config.ts` ni `tailwind.config.js`**. Toda la configuración (capas, tokens, breakpoints, plugins, animaciones, gradientes) se declara en CSS desde [`web/app/styles/tailwind-core.css`](../../web/app/styles/tailwind-core.css) mediante `@layer`, `@import`, `@theme` y `@plugin`.
 
-### Sistema de temas (light/dark)
+Plugins JS de Tailwind cargados:
+- [`web/app/styles/plugins/icons.ts`](../../web/app/styles/plugins/icons.ts)
+- [`web/app/styles/plugins/typography.ts`](../../web/app/styles/plugins/typography.ts)
 
-`next-themes` controla el tema mediante el atributo `data-theme` en `<html>`. Los archivos CSS en `themes/` definen las variables:
+Breakpoints personalizados: `mobile: 100px`, `tablet: 640px`, `pc: 769px`, `2k: 2560px`.
+
+### Capas de design tokens
+
+Tres capas de variables CSS, de menos a más específica:
+
+1. **Paleta base** — [`packages/dify-ui/src/styles/styles.css`](../../packages/dify-ui/src/styles/styles.css) define las escalas crudas (`gray 25-900`, `primary 25-900`, `blue`, `green`, `yellow`, `purple`, `indigo`), sombras y tamaños tipográficos.
+2. **Tokens semánticos generados** — [`packages/dify-ui/src/themes/theme.css`](../../packages/dify-ui/src/themes/theme.css) registra cada token como `@theme inline` (genera la utility Tailwind asociada, p. ej. `bg-components-button-primary-bg`). Los valores reales viven en [`light.css`](../../packages/dify-ui/src/themes/light.css) y [`dark.css`](../../packages/dify-ui/src/themes/dark.css) del mismo paquete, scopeados por `html[data-theme="light|dark"]`.
+3. **Gradientes y máscaras del proyecto** — [`web/themes/manual-light.css`](../../web/themes/manual-light.css) y [`manual-dark.css`](../../web/themes/manual-dark.css).
+
+> Los archivos `theme.css`, `light.css` y `dark.css` del paquete `dify-ui` están marcados como **generados**: editarlos a mano se pierde en la próxima regeneración. Para ajustes permanentes, modificar la fuente de los tokens o usar los archivos `manual-*` como capa de overrides.
+
+### Sistema light/dark
+
+`next-themes` aplica `data-theme="light|dark"` al elemento `<html>` (configurado en `web/app/layout.tsx` con `defaultTheme="system"`, `enableSystem`). El hook [`web/hooks/use-theme.ts`](../../web/hooks/use-theme.ts) envuelve `useTheme` para resolver siempre a `'light'` o `'dark'` (sin estado intermedio `'system'`).
+
+### Estructura real de `web/themes/`
 
 ```
 themes/
-├── light.css          ← variables para tema claro (system)
-├── dark.css           ← variables para tema oscuro (system)
-├── manual-light.css   ← override manual claro
-├── manual-dark.css    ← override manual oscuro
-├── markdown-light.css ← tema específico para contenido markdown
-└── markdown-dark.css
+├── manual-light.css   ← gradientes y máscaras propias del proyecto (light)
+├── manual-dark.css    ← gradientes y máscaras propias del proyecto (dark)
+└── markdown.css       ← estilos para contenido markdown renderizado
 ```
 
-### CSS global (`app/styles/globals.css`)
+### Orden de carga CSS desde `tailwind-core.css`
 
-Carga en orden:
-1. `preflight.css` — reset personalizado
-2. Archivos de tema (`light.css`, `dark.css`, `manual-*.css`)
-3. `tailwindcss` con config apuntando a `tailwind.config.ts`
-4. Utilidades `@utility` para la escala tipográfica del sistema (`system-xs-regular`, `system-2xs-regular`, etc.)
-5. CSS por componente: `button/index.css`, `modal/index.css`, `badge/index.css`, etc.
+1. `@layer theme, base, components, utilities` — declaración de capas.
+2. `tailwindcss/theme.css` y `tailwindcss/utilities.css` (importados selectivamente; el preflight oficial se omite).
+3. [`web/app/styles/preflight.css`](../../web/app/styles/preflight.css) — baseline propio.
+4. `@langgenius/dify-ui/styles.css` — design system (paleta base + tokens semánticos).
+5. Temas manuales del proyecto (`web/themes/manual-{light,dark}.css`).
+6. CSS por componente bajo `web/app/components/base/*/index.css`.
 
 ### Inyección de env en runtime
 
